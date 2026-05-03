@@ -1,0 +1,69 @@
+---
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/sobre-mi', label: 'Reyes García Miró' },
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/contacto', label: 'Contacto' },
+  { href: '/blog', label: 'Blog' },
+];
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-24">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/">
+          <img class="h-20 w-auto transform scale-110 origin-left" src="https://reyesgarciamiro.com/wp-content/uploads/2020/07/Logo-reyes-1.png" alt="Reyes García Miró Logo">
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-8">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-gray-600 hover:text-brand-blue font-medium transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center md:hidden">
+        <button id="mobile-menu-btn" class="text-gray-500 hover:text-brand-blue focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden grid grid-rows-[0fr] transition-all duration-300 ease-in-out bg-white">
+    <div class="overflow-hidden">
+      <div class="border-t px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-inner">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50 rounded-md"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('grid-rows-[0fr]');
+    menu?.classList.toggle('grid-rows-[1fr]');
+  });
+</script>

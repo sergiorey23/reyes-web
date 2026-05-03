@@ -1,0 +1,119 @@
+---
+const testimonials = [
+  {
+    name: "Ana",
+    text: "Antes de empezar la terapia, me sentía un poco perdida. Siempre me encontraba con los mismos esquemas en mi vida amorosa, era frustrante y doloroso. Me sentía culpable y triste, pero no encontraba herramientas para cambiar y volver a confiar en mí. Reyes me ayudo a identificar esquemas, a entenderme mejor, a descubrir quién era y a mejorar mis relaciones con los demás. Gracias a ella he aprendido a trabajar mis angustias, a confiar en mis cualidades y a retomar las riendas de mi vida. He conocido a una persona que me corresponde, que alivia mis dolores del pasado y con quien consigo no reproducir los mismos esquemas de antes. Me siento mejor y he aprendido muchísimo sobre mí. ¡Muchísimas gracias Reyes!"
+  },
+  {
+    name: "María",
+    text: "Sufría malos tratos familiares por parte de mi madre y mi hermano y no sabía cómo gestionar esta situación. Reyes me está ayudando mucho a solucionar el problema de relación. En estos últimos meses me he hecho más fuerte. Ahora me siento feliz y mucho más estable. Ya no tengo miedo a lo que me puedan decir ninguno de los dos, ni a sus amenazas. Reyes es una psicóloga que te ayuda te comprender. Tiene además mucho sentido del humor. Gracias a ella he superado una situación familiar que llevaba toda la vida enquistada."
+  },
+  {
+    name: "Jose",
+    text: "Destacaría de Reyes su empatía y esa capacidad para ver las situaciones de la misma forma que la puedes estar viendo tú en un momento dado. Y luego la comunicación es más fácil, ya que habla tu mismo idioma."
+  },
+  {
+    name: "Luisa",
+    text: "Cuando decidí ir a terapia con Reyes pasaba por una mala etapa en la que mi padre había enfermado. Tampoco se sentía feliz en mi relación de pareja y sufría de ansiedad. Reyes fue rápida en el diagnóstico y supo verme, cosa que no me había pasado nunca con un terapeuta. Esto hizo que confiara en ella y me pudiese abrir. Estuve 2 años en terapia con Reyes y es una de las mejores decisiones que he tomado en mi vida. La ansiedad ha desaparecido y veo la vida con optimismo."
+  },
+  {
+    name: "Lucía",
+    text: "Tenia problemas generados desde la infancia. Dependencia emocional, angustia continua y sentimiento de culpa. Reyes escucha tu vida y saca el problema y te ayuda a entenderlo. Sientes que quiere ayudarte de verdad. Mi vida es totalmente diferente ahora. Me siento más yo misma y tengo mayor control sobre mi vida. Quiero agradecerte infinitamente tu labor y devoción a tus pacientes. Gracias a ti puedo seguir con mi vida. Gracias por existir."
+  },
+  {
+    name: "Susana",
+    text: "Llevaba algunos meses sintiéndome triste y con mucha ansiedad. Estaba pasando el duelo por una ruptura amorosa, y aunque había pasado bastante tiempo, seguía encontrándome triste y con sentimientos de fracaso. Después de algunos meses trabajando con ella, me siento mucho mejor. He recobrado el entusiasmo y la motivación vital que había perdido. De Reyes yo resaltaría la rapidez en el diagnóstico. El buen tino para ver lo que me pasaba. Y también, que sea una profesional que te empuja a avanzar en tu propia curación."
+  }
+];
+---
+
+<section class="py-16 bg-white overflow-hidden relative">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-serif text-brand-blue-dark mb-10">Casos de éxito</h2>
+
+    <div class="relative w-full" id="testimonial-carousel">
+      <!-- Contenedor del Carrusel -->
+      <div class="overflow-hidden rounded-2xl bg-brand-light border border-brand-blue/10 shadow-sm relative grid">
+        {testimonials.map((t, index) => (
+          <div class={`col-start-1 row-start-1 transition-opacity duration-500 ease-in-out flex flex-col justify-center p-4 md:p-6 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`} data-slide={index}>
+            <svg class="w-12 h-12 text-brand-accent/20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <p class="text-gray-700 italic text-lg md:text-xl mb-6 leading-relaxed">"{t.text}"</p>
+            <p class="text-brand-blue-dark font-bold tracking-widest uppercase text-sm">- {t.name}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Controles -->
+      <button id="prev-slide" class="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow border border-gray-100 flex items-center justify-center text-brand-blue hover:bg-brand-blue hover:text-white transition z-20 hover:cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <button id="next-slide" class="absolute top-1/2 -right-4 md:-right-12 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow border border-gray-100 flex items-center justify-center text-brand-blue hover:bg-brand-blue hover:text-white transition z-20 hover:cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+
+      <!-- Indicadores -->
+      <div class="flex justify-center mt-6 space-x-2">
+        {testimonials.map((_, index) => (
+          <button class={`w-2.5 h-2.5 rounded-full transition-colors hover:cursor-pointer dot-indicator ${index === 0 ? 'bg-brand-blue' : 'bg-gray-300 hover:bg-brand-blue/50'}`} data-index={index} aria-label={`Ir a la opinión ${index + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('[data-slide]');
+    const dots = document.querySelectorAll('.dot-indicator');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let autoPlayInterval: number;
+
+    const goToSlide = (index: number) => {
+      slides[currentSlide].classList.remove('opacity-100', 'z-10');
+      slides[currentSlide].classList.add('opacity-0', 'z-0');
+      dots[currentSlide].classList.remove('bg-brand-blue');
+      dots[currentSlide].classList.add('bg-gray-300');
+
+      currentSlide = (index + totalSlides) % totalSlides;
+
+      slides[currentSlide].classList.remove('opacity-0', 'z-0');
+      slides[currentSlide].classList.add('opacity-100', 'z-10');
+      dots[currentSlide].classList.remove('bg-gray-300');
+      dots[currentSlide].classList.add('bg-brand-blue');
+    };
+
+    const nextSlide = () => goToSlide(currentSlide + 1);
+    const prevSlide = () => goToSlide(currentSlide - 1);
+
+    nextBtn?.addEventListener('click', () => {
+      nextSlide();
+      resetInterval();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      prevSlide();
+      resetInterval();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+        resetInterval();
+      });
+    });
+
+    const resetInterval = () => {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = window.setInterval(nextSlide, 6000);
+    };
+
+    // Iniciar autoplay
+    resetInterval();
+  });
+</script>

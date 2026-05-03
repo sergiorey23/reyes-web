@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contacto - Reyes García Miró">
+  <section class="py-16 relative bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-fixed">
+    <div class="absolute inset-0 bg-white/75 backdrop-blur-sm"></div>
+    <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+      <div class="text-center mb-12 animate-fade-in-up">
+        <h1 class="text-4xl font-serif text-brand-blue-dark mb-4">Contacto</h1>
+        <p class="text-xl text-gray-700">¿Tienes alguna duda o quieres concertar una cita? Escríbeme y te responderé lo antes posible.</p>
+      </div>
+
+      <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100 animate-fade-in-up delay-100 relative">
+        <form action="/api/contact" method="POST" id="contact-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+              <input type="text" name="name" required class="w-full border-gray-300 rounded-md shadow-sm p-3 border focus:ring-brand-blue focus:border-brand-blue">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+              <input type="tel" name="phone" class="w-full border-gray-300 rounded-md shadow-sm p-3 border focus:ring-brand-blue focus:border-brand-blue">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+            <input type="email" name="email" required class="w-full border-gray-300 rounded-md shadow-sm p-3 border focus:ring-brand-blue focus:border-brand-blue">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Comentario / Motivo de consulta *</label>
+            <textarea name="message" rows="5" required class="w-full border-gray-300 rounded-md shadow-sm p-3 border focus:ring-brand-blue focus:border-brand-blue"></textarea>
+          </div>
+
+          <div class="flex items-start">
+            <input type="checkbox" id="legal" name="legal" required class="mt-1 h-4 w-4 text-brand-blue rounded border-gray-300 focus:ring-brand-blue">
+            <label for="legal" class="ml-2 block text-sm text-gray-600">
+              He leído y acepto la <a href="/politica-privacidad" class="text-brand-blue underline hover:text-brand-blue-dark">política de privacidad</a> y las <a href="/aviso-legal" class="text-brand-blue underline hover:text-brand-blue-dark">condiciones legales</a>.
+            </label>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-brand-blue hover:bg-brand-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue transition hover:cursor-pointer">
+              Enviar Mensaje
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-12 text-center text-gray-700 animate-fade-in-up delay-200">
+        <p>También puedes contactarme directamente a través de:</p>
+        <p class="text-lg mt-2 font-medium text-brand-blue-dark">
+          <a href="mailto:reyes@reyesgarciamiro.es" class="hover:underline">reyes@reyesgarciamiro.es</a> |
+          <a href="tel:+34630893355" class="hover:underline">+34 630 893 355</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+  contactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    alert('Mensaje enviado correctamente. Te contactaremos muy pronto.');
+    contactForm.reset();
+  });
+</script>
