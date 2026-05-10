@@ -1,4 +1,4 @@
-import { addReview } from '../../db.js';
+import { sanityClient } from "sanity:client";
 
 export const POST = async ({ request }) => {
   const data = await request.formData();
@@ -13,11 +13,40 @@ export const POST = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Faltan campos obligatorios' }), { status: 400 });
   }
 
+  // Lógica de aprobación automática si tiene 5 estrellas
+  const isApproved = rating === 5;
+
   try {
-    addReview({ name, title, content, rating, date });
+    // Para escribir en Sanity necesitamos inicializar un cliente con el token de escritura
+    // sanityClient por defecto (importado de sanity:client) es de solo lectura.
+    // Necesitamos usar la variable de entorno SANITY_API_TOKEN
+    
+    // Importante: No uses import.meta.env en Astro para variables de entorno secretas dinámicas si da problemas, usa process.env
+    const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+    
+    if (!SANITY_API_TOKEN) {
+       console.error("Falta SANITY_API_TOKEN en el entorno");
+       return new Response(JSON.stringify({ error: 'Error de configuración del servidor' }), { status: 500 });
+    }
+
+    const writeClient = sanityClient.withConfig({
+      token: SANITY_API_TOKEN,
+      useCdn: false,
+    });
+
+    await writeClient.create({
+      _type: 'review',
+      name,
+      title,
+      content,
+      rating,
+      date,
+      approved: isApproved
+    });
+
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: 'Error interno del servidor' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Error interno del servidor al guardar en Sanity' }), { status: 500 });
   }
 }

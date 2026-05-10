@@ -1,8 +1,8 @@
 ---
-import { getApprovedReviews } from '../db.js';
+import { sanityClient } from "sanity:client";
 
-// Fetch approved reviews from DB mock
-const displayReviews = getApprovedReviews().slice(0, 3);
+// Obtenemos las últimas 3 reseñas aprobadas desde Sanity
+const displayReviews = await sanityClient.fetch(`*[_type == "review" && approved == true] | order(date desc)[0...3]`);
 
 // Helper to render stars
 const renderStars = (rating: number) => {
@@ -129,7 +129,7 @@ const renderStars = (rating: number) => {
       });
       
       if (response.ok) {
-        alert('¡Gracias por tu reseña! Ha sido enviada y está pendiente de moderación.');
+        alert('¡Gracias por tu reseña! ' + (ratingInput.value === '5' ? 'Se ha publicado correctamente.' : 'Ha sido enviada y está pendiente de moderación.'));
         form.reset();
         // Reset stars
         ratingInput.value = '0';

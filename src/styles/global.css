@@ -1,12 +1,44 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
-  --color-brand-blue: #0f4c75;
-  --color-brand-blue-dark: #093452;
-  --color-brand-light: #fcfaf8;
-  --color-brand-accent: #fbc488;
-  --font-serif: "Playfair Display", serif;
-  --font-sans: "Work Sans", sans-serif;
+  --color-brand-blue: #4F8699;
+  --color-brand-blue-dark: #3A6373;
+  --color-brand-light: #F2F6F7;
+  --color-brand-accent: #D4A373;
+  --color-brand-warm: #EAE0D5;
+}
+
+/* Base styles for simple fade in animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
 }
 
 /* Custom Utilities for Animations */
