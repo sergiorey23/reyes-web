@@ -1,16 +1,31 @@
-<div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-lg z-50 transform translate-y-full transition-transform duration-300">
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-lg z-50 transform translate-y-full transition-transform duration-300"
+>
   <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
     <div class="text-sm text-gray-600">
-      <p>Utilizamos cookies propias y de terceros para fines analíticos y para mostrarte publicidad personalizada en base a un perfil elaborado a partir de tus hábitos de navegación.</p>
+      <p>
+        Utilizamos cookies propias y de terceros para fines analíticos y para mostrarte publicidad personalizada en base a un perfil elaborado a partir de tus
+        hábitos de navegación.
+      </p>
     </div>
     <div class="flex flex-wrap gap-2 shrink-0">
-      <button id="btn-config-cookies" class="px-4 py-2 text-sm font-medium text-brand-blue border border-brand-blue rounded hover:bg-blue-50 transition">
+      <button
+        id="btn-config-cookies"
+        class="px-4 py-2 text-sm font-medium text-brand-blue border border-brand-blue rounded hover:bg-blue-50 hover:cursor-pointer transition"
+      >
         Configurar
       </button>
-      <button id="btn-reject-cookies" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-50 transition">
+      <button
+        id="btn-reject-cookies"
+        class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-50 hover:cursor-pointer transition"
+      >
         Rechazar
       </button>
-      <button id="btn-accept-cookies" class="px-4 py-2 text-sm font-medium text-white bg-brand-blue rounded hover:bg-brand-blue-dark transition">
+      <button
+        id="btn-accept-cookies"
+        class="px-4 py-2 text-sm font-medium text-white bg-brand-blue rounded hover:bg-brand-blue-dark hover:cursor-pointer transition"
+      >
         Aceptar
       </button>
     </div>
@@ -18,37 +33,37 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const banner = document.getElementById('cookie-banner');
-    const acceptBtn = document.getElementById('btn-accept-cookies');
-    const rejectBtn = document.getElementById('btn-reject-cookies');
-    const configBtn = document.getElementById('btn-config-cookies');
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("btn-accept-cookies");
+    const rejectBtn = document.getElementById("btn-reject-cookies");
+    const configBtn = document.getElementById("btn-config-cookies");
 
-    const cookieStatus = localStorage.getItem('cookiesAccepted');
+    const cookieStatus = localStorage.getItem("cookiesAccepted");
 
     if (!cookieStatus) {
       setTimeout(() => {
-        banner?.classList.remove('translate-y-full');
+        banner?.classList.remove("translate-y-full");
       }, 1000);
     }
 
     const hideBanner = () => {
-      banner?.classList.add('translate-y-full');
+      banner?.classList.add("translate-y-full");
     };
 
-    acceptBtn?.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'true');
+    acceptBtn?.addEventListener("click", () => {
+      localStorage.setItem("cookiesAccepted", "true");
       hideBanner();
       // Initialize analytics here
     });
 
-    rejectBtn?.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'false');
+    rejectBtn?.addEventListener("click", () => {
+      localStorage.setItem("cookiesAccepted", "false");
       hideBanner();
     });
 
-    configBtn?.addEventListener('click', () => {
-      alert('Aquí se abriría el modal de configuración avanzada de cookies.');
+    configBtn?.addEventListener("click", () => {
+      alert("Aquí se abriría el modal de configuración avanzada de cookies.");
     });
   });
 </script>
