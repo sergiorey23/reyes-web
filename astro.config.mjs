@@ -2,18 +2,20 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
-
+import sitemap from '@astrojs/sitemap';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://reyesgarciamiro.es',
   output: 'server',
   vite: {
     plugins: [tailwindcss()],
   },
   adapter: vercel(),
   integrations: [
+    sitemap(),
     sanity({
       projectId: '1arljs9t',
       dataset: 'production',

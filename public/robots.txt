@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reyesgarciamiro.es/sitemap-index.xml
+Sitemap: https://reyesgarciamiro.com/sitemap-index.xml

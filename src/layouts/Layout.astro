@@ -11,42 +11,38 @@ interface Props {
   description?: string;
 }
 
-const {
-  title,
-  description = "Psicoterapia, Crecimiento Personal y Tratamiento del Trauma. Atención online y telefónica con Reyes García Miró.",
-} = Astro.props;
+const { title, description = "Psicoterapia, Crecimiento Personal y Tratamiento del Trauma. Atención online y telefónica con Reyes García Miró." } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link
-      rel="icon"
-      type="image/jpeg"
-      href="/cropped-iconoreyes-32x32.jpg"
-      sizes="32x32"
-    />
-    <link
-      rel="icon"
-      type="image/jpeg"
-      href="/cropped-iconoreyes-192x192.jpg"
-      sizes="192x192"
-    />
-    <link
-      rel="apple-touch-icon"
-      type="image/jpeg"
-      href="/cropped-iconoreyes-180x180.jpg"
-    />
-    <meta
-      name="msapplication-TileImage"
-      content="/cropped-iconoreyes-270x270.jpg"
-    />
+    <link rel="icon" type="image/jpeg" href="/cropped-iconoreyes-32x32.jpg" sizes="32x32" />
+    <link rel="icon" type="image/jpeg" href="/cropped-iconoreyes-192x192.jpg" sizes="192x192" />
+    <link rel="apple-touch-icon" type="image/jpeg" href="/cropped-iconoreyes-180x180.jpg" />
+    <meta name="msapplication-TileImage" content="/cropped-iconoreyes-270x270.jpg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Reyes García Miró</title>
+
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site || "https://reyesgarciamiro.es")} />
+
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={`${title} | Reyes García Miró`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Reyes García Miró" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={`${title} | Reyes García Miró`} />
+    <meta property="twitter:description" content={description} />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,9 +51,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body
-    class="bg-brand-light text-gray-800 font-sans flex flex-col min-h-screen"
-  >
+  <body class="bg-brand-light text-gray-800 font-sans flex flex-col min-h-screen">
     <Navbar />
     <main class="grow">
       <slot />
