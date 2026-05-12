@@ -11,4 +11,7 @@ export default defineConfig({
   schema: {
     types: schema.types,
   },
+  releases: {
+    enabled: false
+  }
 })
