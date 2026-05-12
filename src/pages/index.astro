@@ -5,16 +5,20 @@ import Reviews from "../components/Reviews.astro";
 
 <Layout title="Inicio">
   <!-- Hero Section -->
-  <section class="relative bg-brand-light overflow-hidden">
+  <section class="relative bg-brand-light dark:bg-gray-900 overflow-hidden transition-colors duration-300">
     <div class="max-w-7xl mx-auto">
-      <div class="relative z-10 pb-8 bg-brand-light sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-20 px-4 sm:px-6 lg:px-8">
+      <div
+        class="relative z-10 pb-8 bg-brand-light dark:bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300"
+      >
         <main class="mx-auto max-w-7xl">
           <div class="sm:text-center lg:text-left">
-            <h1 class="text-4xl tracking-tight font-serif text-brand-green-dark sm:text-5xl md:text-6xl animate-fade-in-up">
+            <h1 class="text-4xl tracking-tight font-serif text-brand-green-dark dark:text-brand-green-light sm:text-5xl md:text-6xl animate-fade-in-up">
               <span class="block">Refuerza tu salud emocional</span>
-              <span class="block text-brand-green mt-2 delay-100">Construye una vida feliz</span>
+              <span class="block text-brand-green dark:text-brand-green mt-2 delay-100">Construye una vida feliz</span>
             </h1>
-            <p class="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 animate-fade-in-up delay-200">
+            <p
+              class="mt-3 text-base text-gray-600 dark:text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 animate-fade-in-up delay-200"
+            >
               Te ayudo a entender qué hay detrás de tus emociones, para recuperar el bienestar en tu vida. Psicoterapia, Crecimiento Personal y Tratamiento del
               Trauma. Atención online y telefónica.
             </p>
@@ -22,7 +26,7 @@ import Reviews from "../components/Reviews.astro";
               <div class="rounded-md shadow">
                 <a
                   href="/contacto"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-green hover:bg-brand-green-dark md:py-4 md:text-lg transition"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-green hover:bg-brand-green-dark dark:bg-brand-green dark:hover:bg-brand-green-dark md:py-4 md:text-lg transition"
                 >
                   Pedir una cita
                 </a>
@@ -30,7 +34,7 @@ import Reviews from "../components/Reviews.astro";
               <div class="mt-3 sm:mt-0 sm:ml-3">
                 <a
                   href="/sobre-mi"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-brand-green bg-green-100 hover:bg-green-200 md:py-4 md:text-lg transition"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-brand-green bg-green-100 hover:bg-green-200 dark:bg-gray-800 dark:text-brand-green-light dark:hover:bg-gray-700 md:py-4 md:text-lg transition"
                 >
                   Conóceme más
                 </a>
@@ -42,7 +46,7 @@ import Reviews from "../components/Reviews.astro";
     </div>
     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 flex items-center justify-center p-8 lg:p-12">
       <img
-        class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg object-contain opacity-90 mix-blend-multiply"
+        class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg object-contain opacity-90 mix-blend-multiply dark:mix-blend-normal"
         src="https://reyesgarciamiro.com/wp-content/uploads/2022/03/Foto-cabacera-azul.png"
         alt="Psicóloga Terapia"
       />
@@ -50,23 +54,26 @@ import Reviews from "../components/Reviews.astro";
   </section>
 
   <!-- Context Section -->
-  <section class="py-16 bg-white overflow-hidden">
+  <section class="py-16 bg-white dark:bg-gray-800 overflow-hidden transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <!-- Texto -->
         <div class="text-left">
-          <h2 class="text-3xl font-serif text-brand-green mb-8">¿Sientes una opresión constante en el pecho o una tristeza que no sabes de dónde vienen?</h2>
-          <div class="text-lg text-gray-700 space-y-4">
+          <h2 class="text-3xl font-serif text-brand-green dark:text-brand-green-light mb-8">
+            ¿Sientes una opresión constante en el pecho o una tristeza que no sabes de dónde vienen?
+          </h2>
+          <div class="text-lg text-gray-700 dark:text-gray-300 space-y-4">
             <p>
-              <strong>En este momento... Sientes estrés, ansiedad, tristeza...</strong>
+              <strong class="dark:text-white">En este momento... Sientes estrés, ansiedad, tristeza...</strong>
             </p>
             <p>
               Llevas tiempo intentando encontrarle sentido a lo que pasa dentro de ti. Puede que pienses que tu entorno no entiende cómo te sientes. Sabes que
               tu estado de ánimo afecta a tu día a día.
             </p>
             <p>Ha llegado el momento de empezar a cambiar las cosas. Y sientes que necesitas ayuda para avanzar y salir de este estado.</p>
-            <p class="pt-4 border-t border-gray-200 mt-4 text-xl text-brand-green-dark">
+            <p class="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4 text-xl text-brand-green-dark dark:text-brand-green-light">
               Es importante que comprendas que cualquier problema de salud no atendido a tiempo puede derivar en dolencias más graves. <strong
+                class="dark:text-white"
                 >De la misma manera que no tiene sentido soportar un dolor físico agudo sin ayuda, tampoco lo tiene aguantar el dolor emocional en silencio.</strong
               > Tu salud mental debe ser tu prioridad.
             </p>
@@ -74,58 +81,64 @@ import Reviews from "../components/Reviews.astro";
         </div>
 
         <!-- Imagen -->
-        <div class="relative overflow-hidden h-full min-h-[500px] sm:min-h-[600px]">
-          <img src="/Bosque-fondo-J.jpg" alt="Bosque tranquilo" class="absolute inset-0 w-full h-full object-contain" />
+        <div class="relative overflow-hidden h-full min-h-125 sm:min-h-150">
+          <img src="/Bosque-fondo.png" alt="Bosque tranquilo" class="absolute inset-0 w-full h-full object-contain dark:opacity-80" />
         </div>
       </div>
     </div>
   </section>
 
   <!-- How I Help Section -->
-  <section class="py-16 bg-brand-light border-y border-brand-green-dark/10">
+  <section class="py-16 bg-brand-light dark:bg-gray-900 border-y border-brand-green-dark/10 dark:border-gray-800 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 animate-fade-in-up">
-        <h2 class="text-3xl font-serif text-brand-green-dark mb-4">¿Cómo puedo ayudarte a recuperar tu equilibrio?</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        <h2 class="text-3xl font-serif text-brand-green-dark dark:text-brand-green-light mb-4">¿Cómo puedo ayudarte a recuperar tu equilibrio?</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
           A través de un enfoque personalizado, te proporcionaré las herramientas necesarias para enfrentar las dificultades de la vida y alcanzar la
           tranquilidad mental que mereces.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+        <div
+          class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300"
+        >
           <div class="flex items-center gap-6 text-wrap mb-3">
-            <div class="w-12 h-12 bg-brand-accent/20 rounded-full flex items-center justify-center">
+            <div class="w-12 h-12 bg-brand-accent/20 dark:bg-brand-accent/10 rounded-full flex items-center justify-center">
               <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-serif text-brand-blue-dark">Gestión Emocional</h3>
+            <h3 class="text-xl font-serif text-brand-blue-dark dark:text-brand-blue-light">Gestión Emocional</h3>
           </div>
-          <p class="text-gray-600 leading-relaxed">
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
             Iremos directamente a la raíz de tu problema para entender qué te está pasando. Aprenderás a gestionar de forma efectiva los estados de estrés,
             miedo, ansiedad o tristeza.
           </p>
         </div>
 
-        <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+        <div
+          class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300"
+        >
           <div class="flex items-center gap-6 text-wrap mb-3">
-            <div class="w-12 h-12 bg-brand-accent/20 rounded-full flex items-center justify-center">
+            <div class="w-12 h-12 bg-brand-accent/20 dark:bg-brand-accent/10 rounded-full flex items-center justify-center">
               <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-serif text-brand-blue-dark">Transformación de Pensamientos</h3>
+            <h3 class="text-xl font-serif text-brand-blue-dark dark:text-brand-blue-light">Transformación de Pensamientos</h3>
           </div>
-          <p class="text-gray-600 leading-relaxed">
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
             Te enseñaré técnicas probadas para identificar y eliminar pensamientos negativos. Tu mente es como un músculo que entrenaremos para que juegue a tu
             favor, no en tu contra.
           </p>
         </div>
 
-        <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform duration-300">
+        <div
+          class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300"
+        >
           <div class="flex items-center gap-6 text-wrap mb-3">
-            <div class="w-12 h-12 bg-brand-accent/20 rounded-full flex items-center justify-center">
+            <div class="w-12 h-12 bg-brand-accent/20 dark:bg-brand-accent/10 rounded-full flex items-center justify-center">
               <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 ><path
                   stroke-linecap="round"
@@ -134,9 +147,9 @@ import Reviews from "../components/Reviews.astro";
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-serif text-brand-blue-dark">Hábitos y Vínculos Sanos</h3>
+            <h3 class="text-xl font-serif text-brand-blue-dark dark:text-brand-blue-light">Hábitos y Vínculos Sanos</h3>
           </div>
-          <p class="text-gray-600 leading-relaxed">
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
             El bienestar es integral. Te ayudaré a mejorar otros aspectos cruciales como las relaciones con tu entorno, tu descanso, tu alimentación y tus
             rutinas diarias.
           </p>
@@ -144,7 +157,10 @@ import Reviews from "../components/Reviews.astro";
       </div>
 
       <div class="mt-12 text-center">
-        <a href="/servicios" class="inline-flex items-center text-brand-green font-medium hover:text-brand-green-dark hover:underline">
+        <a
+          href="/servicios"
+          class="inline-flex items-center text-brand-green dark:text-brand-green-light font-medium hover:text-brand-green-dark dark:hover:text-brand-green transition-colors"
+        >
           Descubre más sobre mi método de trabajo
           <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
             ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -155,28 +171,30 @@ import Reviews from "../components/Reviews.astro";
   </section>
 
   <!-- Cerebro Divergente Section -->
-  <section class="py-16 bg-white overflow-hidden">
+  <section class="py-16 bg-white dark:bg-gray-800 overflow-hidden transition-colors duration-300">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-serif text-brand-green-dark mb-4">Comprender el Cerebro Divergente</h2>
-        <p class="text-xl text-brand-green font-medium">El cerebro divergente es evolución. Cada mente es única.</p>
+        <h2 class="text-3xl font-serif text-brand-green-dark dark:text-brand-green-light mb-4">Comprender el Cerebro Divergente</h2>
+        <p class="text-xl text-brand-green dark:text-brand-accent font-medium">El cerebro divergente es evolución. Cada mente es única.</p>
       </div>
 
-      <div class="space-y-6 text-lg text-gray-700 leading-relaxed">
+      <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
         <p>
           Durante años hemos mirado al TDAH, al autismo o a la alta sensibilidad como problemas que había que corregir. Pero detrás de estos síntomas hay algo
           mucho más amplio. Son formas de procesar el mundo que la ciencia todavía está aprendiendo a comprender. Son combinaciones únicas, matices que se
           expresan en distintos grados en cada persona. Un continuo en el que cada cerebro tiene su propia forma de funcionar y su propia mezcla funcional.
         </p>
         <p>
-          <strong>Mi trabajo es ayudarte a entender cómo funciona tu cerebro, o el de tus seres queridos, para que podáis desarrollaros plenamente.</strong>
+          <strong class="dark:text-white"
+            >Mi trabajo es ayudarte a entender cómo funciona tu cerebro, o el de tus seres queridos, para que podáis desarrollaros plenamente.</strong
+          >
         </p>
         <p>
           Acompaño a niños, adolescentes y adultos con TDAH, TEA, altas capacidades y alta sensibilidad, diagnosticados o no, con medicación o sin ella, para
           que comprendan cómo funciona su mente y puedan florecer.
         </p>
-        <div class="bg-brand-light p-6 rounded-xl border border-brand-green/10 my-8">
-          <h3 class="text-xl font-serif text-brand-green-dark mb-3">Terapia Infantil y Familiar</h3>
+        <div class="bg-brand-light dark:bg-gray-900 p-6 rounded-xl border border-brand-green/10 dark:border-gray-700 my-8 transition-colors duration-300">
+          <h3 class="text-xl font-serif text-brand-green-dark dark:text-brand-green-light mb-3">Terapia Infantil y Familiar</h3>
           <p class="mb-4">
             El trabajo con los más pequeños se da en un entorno seguro, adaptado a su ritmo y a su forma de procesar. A través del juego y de la regulación
             emocional, el objetivo es ayudarles a entender cómo funcionan y cómo pueden llegar a ser realmente ellos mismos.
@@ -191,9 +209,9 @@ import Reviews from "../components/Reviews.astro";
   </section>
 
   <!-- Newsletter Section -->
-  <section class="py-16 bg-brand-green-dark text-white">
+  <section class="py-16 bg-brand-green-dark dark:bg-gray-900 text-white transition-colors duration-300">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-serif mb-4">Suscríbete a mi newsletter y descárgate gratis mi ebook</h2>
+      <h2 class="text-3xl font-serif mb-4 dark:text-gray-100">Suscríbete a mi newsletter y descárgate gratis mi ebook</h2>
       <p class="text-xl mb-8 font-medium text-brand-accent text-shadow-lg">«Guía para comprender qué es la ansiedad y cómo gestionarla»</p>
 
       <form class="max-w-md mx-auto" action="/api/newsletter" method="POST" id="newsletter-form">
@@ -203,14 +221,14 @@ import Reviews from "../components/Reviews.astro";
             name="name"
             placeholder="Tu nombre"
             required
-            class="bg-white px-4 py-3 rounded-md text-gray-900 border-none shadow-inner focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            class="bg-white dark:bg-gray-800 px-4 py-3 rounded-md text-gray-900 dark:text-gray-100 border border-transparent dark:border-gray-700 shadow-inner focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
           <input
             type="email"
             name="email"
             placeholder="Tu email"
             required
-            class="bg-white px-4 py-3 rounded-md text-gray-900 border-none shadow-inner focus:outline-none focus:ring-2 focus:ring-brand-accent"
+            class="bg-white dark:bg-gray-800 px-4 py-3 rounded-md text-gray-900 dark:text-gray-100 border border-transparent dark:border-gray-700 shadow-inner focus:outline-none focus:ring-2 focus:ring-brand-accent"
           />
 
           <div class="flex items-start text-left">
@@ -223,7 +241,10 @@ import Reviews from "../components/Reviews.astro";
             </label>
           </div>
 
-          <button type="submit" class="bg-[#e1994a] hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-md transition duration-300 hover:cursor-pointer">
+          <button
+            type="submit"
+            class="bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 hover:cursor-pointer"
+          >
             Suscribirme
           </button>
         </div>

@@ -8,17 +8,19 @@ const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt d
 ---
 
 <Layout title="Blog de Psicología - Reyes García Miró">
-  <section class="py-16 bg-white min-h-[60vh]">
+  <section class="py-16 bg-white dark:bg-gray-900 min-h-[60vh] transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h1 class="text-4xl font-serif text-brand-green-dark mb-4 animate-fade-in-up">Blog sobre Psicología</h1>
-        <p class="text-xl text-gray-600 animate-fade-in-up delay-100">Artículos, reflexiones y recursos sobre salud mental y bienestar emocional.</p>
+        <h1 class="text-4xl font-serif text-brand-green-dark dark:text-brand-green-light mb-4 animate-fade-in-up">Blog sobre Psicología</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 animate-fade-in-up delay-100">
+          Artículos, reflexiones y recursos sobre salud mental y bienestar emocional.
+        </p>
       </div>
 
       {
         posts.length === 0 ? (
-          <div class="inline-flex items-center justify-center p-8 bg-brand-light rounded-xl border border-brand-green/20 animate-fade-in-up delay-200 w-full">
-            <div class="text-brand-green text-center">
+          <div class="inline-flex items-center justify-center p-8 bg-brand-light dark:bg-gray-800 rounded-xl border border-brand-green/20 animate-fade-in-up delay-200 w-full transition-colors duration-300">
+            <div class="text-brand-green dark:text-brand-green-light text-center">
               <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
@@ -33,9 +35,9 @@ const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt d
         ) : (
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post: any) => (
-              <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group flex flex-col h-full animate-fade-in-up">
+              <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 group flex flex-col h-full animate-fade-in-up">
                 {post.mainImage?.asset && (
-                  <a href={`/blog/${post.slug.current}`} class="block overflow-hidden aspect-video bg-gray-50">
+                  <a href={`/blog/${post.slug.current}`} class="block overflow-hidden aspect-video bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
                     <img
                       src={urlFor(post.mainImage).width(600).url()}
                       alt={post.title}
@@ -44,15 +46,18 @@ const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt d
                   </a>
                 )}
                 <div class="p-6 flex flex-col grow">
-                  <time class="text-sm text-gray-500 mb-3 block">
+                  <time class="text-sm text-gray-500 dark:text-gray-400 mb-3 block transition-colors duration-300">
                     {new Date(post.publishedAt).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })}
                   </time>
-                  <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif group-hover:text-brand-green transition-colors">
+                  <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-serif group-hover:text-brand-green dark:group-hover:text-brand-green-light transition-colors duration-300">
                     <a href={`/blog/${post.slug.current}`}>{post.title}</a>
                   </h2>
-                  <p class="text-gray-600 mb-6 grow">{post.excerpt}</p>
-                  <div class="mt-auto pt-4 border-t border-gray-100">
-                    <a href={`/blog/${post.slug.current}`} class="text-brand-green font-medium hover:text-brand-green-dark inline-flex items-center">
+                  <p class="text-gray-600 dark:text-gray-300 mb-6 grow transition-colors duration-300">{post.excerpt}</p>
+                  <div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                    <a
+                      href={`/blog/${post.slug.current}`}
+                      class="text-brand-green dark:text-brand-green-light font-medium hover:text-brand-green-dark dark:hover:text-brand-green inline-flex items-center transition-colors"
+                    >
                       Leer más
                       <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

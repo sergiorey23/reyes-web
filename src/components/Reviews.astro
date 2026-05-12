@@ -10,9 +10,7 @@ interface Review {
 }
 
 // Obtenemos todas las reseñas aprobadas desde Sanity
-const allReviews: Review[] = await sanityClient.fetch(
-  `*[_type == "review" && approved == true] | order(date desc)`
-);
+const allReviews: Review[] = await sanityClient.fetch(`*[_type == "review" && approved == true] | order(date desc)`);
 
 // Helper to render stars
 const renderStars = (rating: number) => {
@@ -27,11 +25,7 @@ const renderStars = (rating: number) => {
 
 // Calculations for summary
 const totalReviews = allReviews.length;
-const averageRatingNum =
-  totalReviews > 0
-    ? allReviews.reduce((acc, review) => acc + (review.rating || 0), 0) /
-      totalReviews
-    : 0;
+const averageRatingNum = totalReviews > 0 ? allReviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews : 0;
 const averageRating = averageRatingNum.toFixed(1).replace(".", ",");
 
 const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
@@ -47,7 +41,7 @@ const ratingPercentages = {
   4: totalReviews > 0 ? Math.round((ratingCounts[4] / totalReviews) * 100) : 0,
   3: totalReviews > 0 ? Math.round((ratingCounts[3] / totalReviews) * 100) : 0,
   2: totalReviews > 0 ? Math.round((ratingCounts[2] / totalReviews) * 100) : 0,
-  1: totalReviews > 0 ? Math.round((ratingCounts[1] / totalReviews) * 100) : 0,
+  1: totalReviews > 0 ? Math.round((ratingCounts[1] / totalReviews) * 100) : 0
 };
 
 const labels: Record<number, string> = {
@@ -55,47 +49,36 @@ const labels: Record<number, string> = {
   4: "Muy buena",
   3: "Media",
   2: "Mala",
-  1: "Muy mala",
+  1: "Muy mala"
 };
 ---
 
-<section class="py-16 bg-brand-light">
+<section class="py-16 bg-brand-light transition-colors duration-300 dark:bg-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-serif text-brand-green-dark text-center mb-12">
-      Lo que dicen mis pacientes
-    </h2>
+    <h2 class="text-3xl font-serif text-brand-green-dark dark:text-brand-green-light text-center mb-12">Lo que dicen mis pacientes</h2>
 
     <!-- Summary -->
-    <div
-      class="max-w-lg mx-auto bg-gray-50 p-5 sm:p-6 rounded-xl shadow-sm border border-gray-100 mb-12"
-    >
+    <div class="max-w-lg mx-auto bg-gray-50 dark:bg-gray-900 p-5 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 mb-12">
       <div class="flex items-center gap-3 mb-1">
-        <span class="text-3xl font-bold text-gray-900">{averageRating}</span>
-        <div class="flex" set:html={renderStars(Math.round(averageRatingNum))}>
-        </div>
+        <span class="text-3xl font-bold text-gray-900 dark:text-gray-100">{averageRating}</span>
+        <div class="flex" set:html={renderStars(Math.round(averageRatingNum))} />
       </div>
-      <p class="text-gray-600 mb-4 text-sm font-medium">
-        {averageRating} de 5 estrellas (basado en {totalReviews} reseña{
-          totalReviews !== 1 ? "s" : ""
-        })
+      <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm font-medium">
+        {averageRating} de 5 estrellas (basado en {totalReviews} reseña{totalReviews !== 1 ? "s" : ""})
       </p>
 
       <div class="space-y-2">
         {
           [5, 4, 3, 2, 1].map((star) => (
             <div class="flex items-center gap-3 text-xs sm:text-sm">
-              <div class="w-20 sm:w-24 shrink-0 text-gray-700 font-medium">
-                {labels[star as keyof typeof labels]}
-              </div>
-              <div class="grow h-2.5 bg-gray-200 rounded-sm overflow-hidden">
+              <div class="w-20 sm:w-24 shrink-0 text-gray-700  dark:text-gray-300 font-medium">{labels[star as keyof typeof labels]}</div>
+              <div class="grow h-2.5 bg-gray-200 dark:bg-gray-500 rounded-sm overflow-hidden">
                 <div
                   class="h-full bg-yellow-400 rounded-sm transition-all duration-1000 ease-out"
-                  style={`width: ${
-                    ratingPercentages[star as keyof typeof ratingPercentages]
-                  }%`}
+                  style={`width: ${ratingPercentages[star as keyof typeof ratingPercentages]}%`}
                 />
               </div>
-              <div class="w-10 sm:w-12 shrink-0 text-right text-gray-600 font-medium">
+              <div class="w-10 sm:w-12 shrink-0 text-right text-gray-600  dark:text-gray-400 font-medium">
                 {ratingPercentages[star as keyof typeof ratingPercentages]}%
               </div>
             </div>
@@ -108,26 +91,19 @@ const labels: Record<number, string> = {
       {
         allReviews.map((review, index) => (
           <div
-            class={`bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100 review-card ${
-              index >= 3 ? "hidden" : ""
-            }`}
+            class={`bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 review-card ${index >= 3 ? "hidden" : ""}`}
           >
             <div class="flex items-center gap-3 mb-4">
-              <div
-                class="flex items-center"
-                set:html={renderStars(review.rating)}
-              />
+              <div class="flex items-center" set:html={renderStars(review.rating)} />
               {review.date && (
-                <span class="text-sm text-gray-500 font-medium border-l border-gray-300 pl-3">
+                <span class="text-sm text-gray-500 dark:text-gray-400 font-medium border-l border-gray-300 dark:border-gray-600 pl-3">
                   {new Date(review.date).toLocaleDateString("es-ES")}
                 </span>
               )}
             </div>
-            <h3 class="font-bold text-lg mb-2 text-gray-800">{review.title}</h3>
-            <p class="text-gray-600 mb-4 italic">{review.content}</p>
-            <div class="text-sm text-gray-500 font-medium">
-              - {review.name || "Anónimo"}
-            </div>
+            <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">{review.title}</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 italic">{review.content}</p>
+            <div class="text-sm text-gray-500 dark:text-gray-400 font-medium">- {review.name || "Anónimo"}</div>
           </div>
         ))
       }
@@ -139,7 +115,7 @@ const labels: Record<number, string> = {
           <button
             id="load-more-reviews"
             type="button"
-            class="bg-white border border-brand-green text-brand-green font-medium py-2 px-6 rounded-md hover:bg-brand-green hover:text-white transition cursor-pointer"
+            class="  transition duration-300 border border-brand-green dark:border-brand-green-light text-brand-green dark:text-brand-green-light font-medium py-2 px-6 rounded-md hover:bg-brand-green dark:hover:bg-brand-green-light hover:text-white dark:hover:text-black cursor-pointer"
           >
             Cargar más reseñas
           </button>
@@ -149,19 +125,12 @@ const labels: Record<number, string> = {
 
     <!-- Review Form -->
     <div
-      class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100"
+      class="max-w-2xl mx-auto bg-white dark:bg-gray-900 transition-colors duration-300 p-8 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
     >
       <h3 class="text-2xl font-serif mb-6 text-center">Deja tu reseña</h3>
-      <form
-        action="/api/reviews"
-        method="POST"
-        class="space-y-4"
-        id="review-form"
-      >
+      <form action="/api/reviews" method="POST" class="space-y-4" id="review-form">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Puntuación</label
-          >
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Puntuación</label>
           <div class="flex space-x-1" id="star-rating">
             <svg
               class="w-8 h-8 text-gray-300 cursor-pointer star transition-colors hover:text-yellow-400"
@@ -210,49 +179,41 @@ const labels: Record<number, string> = {
             </svg>
           </div>
           <input type="hidden" name="rating" id="rating-input" value="0" />
-          <p id="rating-error" class="text-red-500 text-sm mt-1 hidden">
-            Por favor, selecciona una puntuación.
-          </p>
+          <p id="rating-error" class="text-red-500 text-sm mt-1 hidden">Por favor, selecciona una puntuación.</p>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Título</label
-          >
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Título</label>
           <input
             type="text"
             name="title"
             required
-            class="w-full border-gray-300 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
+            class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
           />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Reseña</label
-          >
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reseña</label>
           <textarea
             name="content"
             rows="4"
             required
-            class="w-full border-gray-300 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
+            class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
           ></textarea>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1"
-            >Nombre (Opcional)</label
-          >
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre (Opcional)</label>
           <input
             type="text"
             name="name"
-            class="w-full border-gray-300 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
+            class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
           />
         </div>
 
         <button
           type="submit"
-          class="w-full bg-brand-accent text-white font-medium py-3 px-4 rounded-md cursor-pointer hover:bg-yellow-600 transition"
+          class="w-full bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-md cursor-pointer transition"
         >
           Enviar reseña
         </button>
@@ -283,9 +244,7 @@ const labels: Record<number, string> = {
 
   // Script para gestionar las estrellas interactivas
   const stars = document.querySelectorAll(".star");
-  const ratingInput = document.getElementById(
-    "rating-input"
-  ) as HTMLInputElement;
+  const ratingInput = document.getElementById("rating-input") as HTMLInputElement;
   const ratingError = document.getElementById("rating-error");
   const form = document.getElementById("review-form") as HTMLFormElement;
 
@@ -338,16 +297,11 @@ const labels: Record<number, string> = {
     try {
       const response = await fetch("/api/reviews", {
         method: "POST",
-        body: formData,
+        body: formData
       });
 
       if (response.ok) {
-        alert(
-          "¡Gracias por tu reseña! " +
-            (ratingInput.value === "5"
-              ? "Se ha publicado correctamente."
-              : "Ha sido enviada y está pendiente de moderación.")
-        );
+        alert("¡Gracias por tu reseña! " + (ratingInput.value === "5" ? "Se ha publicado correctamente." : "Ha sido enviada y está pendiente de moderación."));
         form.reset();
         // Reset stars
         ratingInput.value = "0";

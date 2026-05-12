@@ -1,11 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Habilitar la variante dark manual para Tailwind v4 */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-brand-blue: #4F8699;
   --color-brand-blue-dark: #3A6373;
+  --color-brand-blue-light: #8CC4D9;
   --color-brand-green: #0C804F;
   --color-brand-green-dark: #075031;
+  --color-brand-green-light: #62C69B;
   --color-brand-light: #F2F6F7;
   --color-brand-accent: #D4A373;
   --color-brand-warm: #EAE0D5;

@@ -27,29 +27,29 @@ const testimonials = [
 ];
 ---
 
-<section class="py-16 bg-white overflow-hidden relative">
+<section class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300 overflow-hidden relative">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl font-serif text-brand-green-dark mb-10">Casos de éxito</h2>
+    <h2 class="text-3xl font-serif text-brand-green-dark dark:text-brand-green-light dark:text-brand-green-light mb-10">Casos de éxito</h2>
 
     <div class="relative w-full" id="testimonial-carousel">
       <!-- Contenedor del Carrusel -->
-      <div class="overflow-hidden rounded-2xl bg-brand-light border border-brand-green/10 shadow-sm relative grid">
+      <div class="overflow-hidden rounded-2xl bg-brand-light dark:bg-gray-900 transition-colors duration-300 dark:bg-gray-900 border border-brand-green/10 shadow-sm relative grid">
         {testimonials.map((t, index) => (
           <div class={`col-start-1 row-start-1 transition-opacity duration-500 ease-in-out flex flex-col justify-center p-4 md:p-6 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`} data-slide={index}>
             <svg class="w-12 h-12 text-brand-accent/20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
-            <p class="text-gray-700 italic text-lg md:text-xl mb-6 leading-relaxed">"{t.text}"</p>
-            <p class="text-brand-green-dark font-bold tracking-widest uppercase text-sm">- {t.name}</p>
+            <p class="text-gray-700 dark:text-gray-300 italic text-lg md:text-xl mb-6 leading-relaxed">"{t.text}"</p>
+            <p class="text-brand-green-dark dark:text-brand-green-light dark:text-brand-green-light font-bold tracking-widest uppercase text-sm">- {t.name}</p>
           </div>
         ))}
       </div>
 
       <!-- Controles -->
-      <button id="prev-slide" class="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow border border-gray-100 flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition z-20 hover:cursor-pointer">
+      <button id="prev-slide" class="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2 w-10 h-10 bg-white dark:bg-gray-800 transition-colors duration-300 rounded-full shadow border border-gray-100 dark:border-gray-700 flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition z-20 hover:cursor-pointer">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </button>
-      <button id="next-slide" class="absolute top-1/2 -right-4 md:-right-12 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow border border-gray-100 flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition z-20 hover:cursor-pointer">
+      <button id="next-slide" class="absolute top-1/2 -right-4 md:-right-12 transform -translate-y-1/2 w-10 h-10 bg-white dark:bg-gray-800 transition-colors duration-300 rounded-full shadow border border-gray-100 dark:border-gray-700 flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition z-20 hover:cursor-pointer">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
       </button>
 
