@@ -24,9 +24,13 @@
     "@types/react-dom": "^19.2.3",
     "astro": "^6.2.1",
     "astro-portabletext": "^0.13.0",
+    "lodash": "^4.18.1",
     "react": "^19.2.6",
+    "react-compiler-runtime": "^1.0.0",
     "react-dom": "^19.2.6",
+    "react-is": "^19.2.6",
     "sanity": "^5.24.0",
+    "styled-components": "^6.4.1",
     "tailwindcss": "^4.2.4"
   }
 }

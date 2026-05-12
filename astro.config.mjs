@@ -10,16 +10,16 @@ import react from '@astrojs/react';
 export default defineConfig({
   output: 'server',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
   adapter: vercel(),
   integrations: [
-    react(),
     sanity({
       projectId: '1arljs9t',
       dataset: 'production',
       useCdn: false, // `false` si quieres asegurarte de ver datos frescos, o true para mejor rendimiento
       studioBasePath: '/admin', // Ruta para acceder al CMS incrustado
     }),
+    react()
   ],
 });

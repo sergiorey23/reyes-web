@@ -21,8 +21,8 @@ export const POST = async ({ request }) => {
     // sanityClient por defecto (importado de sanity:client) es de solo lectura.
     // Necesitamos usar la variable de entorno SANITY_API_TOKEN
     
-    // Importante: No uses import.meta.env en Astro para variables de entorno secretas dinámicas si da problemas, usa process.env
-    const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+    // Importante: En Astro podemos acceder a variables de entorno con import.meta.env
+    const SANITY_API_TOKEN = import.meta.env.SANITY_API_TOKEN || process.env.SANITY_API_TOKEN;
     
     if (!SANITY_API_TOKEN) {
        console.error("Falta SANITY_API_TOKEN en el entorno");

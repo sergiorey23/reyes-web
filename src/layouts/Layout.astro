@@ -11,16 +11,40 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Psicoterapia, Crecimiento Personal y Tratamiento del Trauma. Atención online y telefónica con Reyes García Miró." } = Astro.props;
+const {
+  title,
+  description = "Psicoterapia, Crecimiento Personal y Tratamiento del Trauma. Atención online y telefónica con Reyes García Miró.",
+} = Astro.props;
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="/cropped-iconoreyes-32x32.jpg"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="/cropped-iconoreyes-192x192.jpg"
+      sizes="192x192"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/jpeg"
+      href="/cropped-iconoreyes-180x180.jpg"
+    />
+    <meta
+      name="msapplication-TileImage"
+      content="/cropped-iconoreyes-270x270.jpg"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Reyes García Miró</title>
     <!-- Google Fonts -->
@@ -31,7 +55,9 @@ const { title, description = "Psicoterapia, Crecimiento Personal y Tratamiento d
       rel="stylesheet"
     />
   </head>
-  <body class="bg-brand-light text-gray-800 font-sans flex flex-col min-h-screen">
+  <body
+    class="bg-brand-light text-gray-800 font-sans flex flex-col min-h-screen"
+  >
     <Navbar />
     <main class="grow">
       <slot />

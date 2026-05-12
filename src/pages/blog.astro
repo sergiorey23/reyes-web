@@ -11,13 +11,13 @@ const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt d
   <section class="py-16 bg-white min-h-[60vh]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h1 class="text-4xl font-serif text-brand-blue-dark mb-4 animate-fade-in-up">Blog sobre Psicología</h1>
+        <h1 class="text-4xl font-serif text-brand-green-dark mb-4 animate-fade-in-up">Blog sobre Psicología</h1>
         <p class="text-xl text-gray-600 animate-fade-in-up delay-100">Artículos, reflexiones y recursos sobre salud mental y bienestar emocional.</p>
       </div>
       
       {posts.length === 0 ? (
-        <div class="inline-flex items-center justify-center p-8 bg-brand-light rounded-xl border border-brand-blue/20 animate-fade-in-up delay-200 w-full">
-          <div class="text-brand-blue text-center">
+        <div class="inline-flex items-center justify-center p-8 bg-brand-light rounded-xl border border-brand-green/20 animate-fade-in-up delay-200 w-full">
+          <div class="text-brand-green text-center">
             <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-.2-.9l-9-13a2 2 0 00-3.6 0l-9 13a2 2 0 00-.2.9V20a2 2 0 002 2h14a2 2 0 002-2z"></path></svg>
             <h2 class="text-2xl font-serif">Próximamente publicaré nuevos artículos</h2>
           </div>
@@ -39,12 +39,12 @@ const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt d
                 <time class="text-sm text-gray-500 mb-3 block">
                   {new Date(post.publishedAt).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
                 </time>
-                <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif group-hover:text-brand-blue transition-colors">
+                <h2 class="text-xl font-bold text-gray-900 mb-3 font-serif group-hover:text-brand-green transition-colors">
                   <a href={`/blog/${post.slug.current}`}>{post.title}</a>
                 </h2>
                 <p class="text-gray-600 mb-6 flex-grow">{post.excerpt}</p>
                 <div class="mt-auto pt-4 border-t border-gray-100">
-                  <a href={`/blog/${post.slug.current}`} class="text-brand-blue font-medium hover:text-brand-blue-dark inline-flex items-center">
+                  <a href={`/blog/${post.slug.current}`} class="text-brand-green font-medium hover:text-brand-green-dark inline-flex items-center">
                     Leer más
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </a>
