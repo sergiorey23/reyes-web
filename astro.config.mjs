@@ -11,10 +11,14 @@ export default defineConfig({
   //site: 'https://reyesgarciamiro.es',
   output: 'server',
   server: {
-    allowedHosts: true,
+    host: true,
   },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: true,
+      cors: true,
+    },
   },
   adapter: vercel(),
   integrations: [
