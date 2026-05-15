@@ -10,6 +10,9 @@ import react from '@astrojs/react';
 export default defineConfig({
   //site: 'https://reyesgarciamiro.es',
   output: 'server',
+  server: {
+    allowedHosts: true,
+  },
   vite: {
     plugins: [tailwindcss()],
   },
