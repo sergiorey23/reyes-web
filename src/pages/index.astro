@@ -101,58 +101,71 @@ import Reviews from "../components/Reviews.astro";
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div
-          class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300"
+          class="relative p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300 overflow-hidden bg-cover bg-center"
+          style="background-image: url('/bg-gestion.png');"
         >
-          <div class="flex items-center gap-6 text-wrap mb-3">
-            <div class="w-12 h-12 shrink-0 bg-brand-accent/20 dark:bg-brand-accent/10 rounded-full flex items-center justify-center">
-              <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
+          <!-- Capa oscura semitransparente -->
+          <div class="absolute inset-0 bg-black/40 dark:bg-black/65 z-0"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-6 text-wrap mb-3">
+              <div class="w-12 h-12 shrink-0 bg-brand-accent/30 dark:bg-brand-accent/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-serif text-white drop-shadow-md">Gestión Emocional</h3>
             </div>
-            <h3 class="text-xl font-serif text-brand-blue-dark dark:text-brand-blue-light">Gestión Emocional</h3>
+            <p class="text-white/95 leading-relaxed font-medium">
+              Iremos directamente a la raíz de tu problema para entender qué te está pasando. Aprenderás a gestionar de forma efectiva los estados de estrés,
+              miedo, ansiedad o tristeza.
+            </p>
           </div>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Iremos directamente a la raíz de tu problema para entender qué te está pasando. Aprenderás a gestionar de forma efectiva los estados de estrés,
-            miedo, ansiedad o tristeza.
-          </p>
         </div>
 
         <div
-          class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300"
+          class="relative p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300 overflow-hidden bg-cover bg-center"
+          style="background-image: url('/bg-pensamientos.avif');"
         >
-          <div class="flex items-center gap-6 text-wrap mb-3">
-            <div class="w-12 h-12 shrink-0 bg-brand-accent/20 dark:bg-brand-accent/10 rounded-full flex items-center justify-center">
-              <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
+          <div class="absolute inset-0 bg-black/40 dark:bg-black/65 z-0"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-6 text-wrap mb-3">
+              <div class="w-12 h-12 shrink-0 bg-brand-accent/30 dark:bg-brand-accent/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-serif text-white drop-shadow-md">Transformación de Pensamientos</h3>
             </div>
-            <h3 class="text-xl font-serif text-brand-blue-dark dark:text-brand-blue-light">Transformación de Pensamientos</h3>
+            <p class="text-white/95 leading-relaxed font-medium">
+              Te enseñaré técnicas probadas para identificar y eliminar pensamientos negativos. Tu mente es como un músculo que entrenaremos para que juegue a
+              tu favor, no en tu contra.
+            </p>
           </div>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Te enseñaré técnicas probadas para identificar y eliminar pensamientos negativos. Tu mente es como un músculo que entrenaremos para que juegue a tu
-            favor, no en tu contra.
-          </p>
         </div>
 
         <div
-          class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300"
+          class="relative p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform duration-300 overflow-hidden bg-cover bg-center"
+          style="background-image: url('/bg-habitos.png');"
         >
-          <div class="flex items-center gap-6 text-wrap mb-3">
-            <div class="w-12 h-12 shrink-0 bg-brand-accent/20 dark:bg-brand-accent/10 rounded-full flex items-center justify-center">
-              <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-              </svg>
+          <div class="absolute inset-0 bg-black/40 dark:bg-black/65 z-0"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-6 text-wrap mb-3">
+              <div class="w-12 h-12 shrink-0 bg-brand-accent/30 dark:bg-brand-accent/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-serif text-white drop-shadow-md">Hábitos y Vínculos Sanos</h3>
             </div>
-            <h3 class="text-xl font-serif text-brand-blue-dark dark:text-brand-blue-light">Hábitos y Vínculos Sanos</h3>
+            <p class="text-white/95 leading-relaxed font-medium">
+              El bienestar es integral. Te ayudaré a mejorar otros aspectos cruciales como las relaciones con tu entorno, tu descanso, tu alimentación y tus
+              rutinas diarias.
+            </p>
           </div>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-            El bienestar es integral. Te ayudaré a mejorar otros aspectos cruciales como las relaciones con tu entorno, tu descanso, tu alimentación y tus
-            rutinas diarias.
-          </p>
         </div>
       </div>
 
@@ -172,40 +185,70 @@ import Reviews from "../components/Reviews.astro";
 
   <!-- Cerebro Divergente Section -->
   <section class="py-16 bg-white dark:bg-gray-800 overflow-hidden transition-colors duration-300">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
-      <div class="text-center mb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
+      <div class="text-center mb-10 lg:mb-16">
         <h2 class="text-3xl font-serif text-brand-green-dark dark:text-brand-green-light mb-4">Comprender el Cerebro Divergente</h2>
         <p class="text-xl text-brand-green dark:text-brand-accent font-medium">El cerebro divergente es evolución. Cada mente es única.</p>
       </div>
 
-      <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-        <p>
-          Durante años hemos mirado al TDAH, al autismo o a la alta sensibilidad como problemas que había que corregir. Pero detrás de estos síntomas hay algo
-          mucho más amplio. Son formas de procesar el mundo que la ciencia todavía está aprendiendo a comprender. Son combinaciones únicas, matices que se
-          expresan en distintos grados en cada persona. Un continuo en el que cada cerebro tiene su propia forma de procesar la información y su propia mezcla
-          funcional.
-        </p>
-        <p>
-          <strong class="dark:text-white"
-            >Mi trabajo es ayudarte a entender cómo funciona tu cerebro, o el de tus seres queridos, para que podáis desarrollaros plenamente.</strong
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p>
+            Durante años hemos mirado al TDAH, al autismo o a la alta sensibilidad como problemas que había que corregir. Pero detrás de estos síntomas hay algo
+            mucho más amplio. Son formas de procesar el mundo que la ciencia todavía está aprendiendo a comprender. Son combinaciones únicas, matices que se
+            expresan en distintos grados en cada persona. Un continuo en el que cada cerebro tiene su propia forma de procesar la información y su propia mezcla
+            funcional.
+          </p>
+          <p>
+            <strong class="dark:text-white"
+              >Mi trabajo es ayudarte a entender cómo funciona tu cerebro, o el de tus seres queridos, para que podáis desarrollaros plenamente.</strong
+            >
+          </p>
+          <p>
+            Acompaño a niños, adolescentes y adultos con TDAH, TEA, altas capacidades y alta sensibilidad, diagnosticados o no, con medicación o sin ella, para
+            que comprendan cómo funciona su mente y puedan florecer.
+          </p>
+          <div
+            class="bg-brand-light dark:bg-gray-900 p-6 rounded-xl border border-brand-green/10 dark:border-gray-700 my-8 lg:mb-0 transition-colors duration-300"
           >
-        </p>
-        <p>
-          Acompaño a niños, adolescentes y adultos con TDAH, TEA, altas capacidades y alta sensibilidad, diagnosticados o no, con medicación o sin ella, para
-          que comprendan cómo funciona su mente y puedan florecer.
-        </p>
-        <div class="bg-brand-light dark:bg-gray-900 p-6 rounded-xl border border-brand-green/10 dark:border-gray-700 my-8 transition-colors duration-300">
-          <h3 class="text-xl font-serif text-brand-green-dark dark:text-brand-green-light mb-3">Terapia Infantil y Familiar</h3>
-          <p class="mb-4">
-            El trabajo con los más pequeños se da en un entorno seguro, adaptado a su ritmo y a su forma de procesar. A través del juego y de la regulación
-            emocional, el objetivo es ayudarles a entender cómo funcionan y cómo pueden llegar a ser realmente ellos mismos.
-          </p>
-          <p class="m-0">
-            Muchas veces el acompañamiento es familiar. Puede suceder que haya otros miembros de la familia con su propia mezcla divergente, no diagnosticada, y
-            que todo esté interaccionando entre sí. En esos casos, se acompaña a la familia para que entienda lo que está pasando y aprendan a regularse juntos.
-          </p>
+            <h3 class="text-xl font-serif text-brand-green-dark dark:text-brand-green-light mb-3">Terapia Infantil y Familiar</h3>
+            <p class="mb-4">
+              El trabajo con los más pequeños se da en un entorno seguro, adaptado a su ritmo y a su forma de procesar. A través del juego y de la regulación
+              emocional, el objetivo es ayudarles a entender cómo funcionan y cómo pueden llegar a ser realmente ellos mismos.
+            </p>
+            <p class="m-0">
+              Muchas veces el acompañamiento es familiar. Puede suceder que haya otros miembros de la familia con su propia mezcla divergente, no diagnosticada,
+              y que todo esté interaccionando entre sí. En esos casos, se acompaña a la familia para que entienda lo que está pasando y aprendan a regularse
+              juntos.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative w-full max-w-lg mx-auto lg:max-w-none pt-4 lg:pt-0">
+          <div class="aspect-4/5 sm:aspect-4/3 lg:aspect-3/4 relative rounded-2xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700">
+            <img src="cerebros-divergentes-family.jpg" alt="Familia feliz y unida" class="absolute inset-0 w-full h-full object-cover" />
+          </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CTA Bottom -->
+  <section class="py-20 bg-[url('beach-sunset.png')] bg-cover bg-center relative">
+    <div class="absolute inset-0 bg-brand-blue mix-blend-multiply"></div>
+    <div class="relative max-w-4xl mx-auto px-4 text-center text-white z-10">
+      <h2 class="text-3xl font-serif mb-6 font-bold [text-shadow:0_4px_25px_rgba(0,0,0,0.9),0_2px_10px_rgba(0,0,0,0.8)]">
+        La terapia es un proceso. Un camino que vale la pena recorrer.
+      </h2>
+      <p class="text-xl mb-8 font-medium [text-shadow:0_4px_20px_rgba(0,0,0,0.9),0_2px_8px_rgba(0,0,0,0.8)]">
+        Comprender que la psicoterapia es un proceso te permitirá disfrutar del trayecto hacia el autoconocimiento y la paz mental.
+      </p>
+      <a
+        href="/contacto"
+        class="inline-block bg-brand-blue text-white font-bold py-3 px-8 rounded-md shadow-lg hover:bg-brand-blue-dark transition hover:scale-105"
+      >
+        Empezar mi proceso
+      </a>
     </div>
   </section>
 
@@ -255,25 +298,6 @@ import Reviews from "../components/Reviews.astro";
 
   <!-- Reviews Section -->
   <Reviews />
-
-  <!-- CTA Bottom -->
-  <section class="py-20 bg-[url('beach-sunset.png')] bg-cover bg-center relative">
-    <div class="absolute inset-0 bg-brand-blue mix-blend-multiply"></div>
-    <div class="relative max-w-4xl mx-auto px-4 text-center text-white z-10">
-      <h2 class="text-3xl font-serif mb-6 font-bold [text-shadow:0_4px_25px_rgba(0,0,0,0.9),0_2px_10px_rgba(0,0,0,0.8)]">
-        La terapia es un proceso. Un camino que vale la pena recorrer.
-      </h2>
-      <p class="text-xl mb-8 font-medium [text-shadow:0_4px_20px_rgba(0,0,0,0.9),0_2px_8px_rgba(0,0,0,0.8)]">
-        Comprender que la psicoterapia es un proceso te permitirá disfrutar del trayecto hacia el autoconocimiento y la paz mental.
-      </p>
-      <a
-        href="/contacto"
-        class="inline-block bg-brand-blue text-white font-bold py-3 px-8 rounded-md shadow-lg hover:bg-brand-blue-dark transition hover:scale-105"
-      >
-        Empezar mi proceso
-      </a>
-    </div>
-  </section>
 </Layout>
 
 <script>

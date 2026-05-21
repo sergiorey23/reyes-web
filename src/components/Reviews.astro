@@ -9,8 +9,11 @@ interface Review {
   date?: string;
 }
 
-// Obtenemos todas las reseñas aprobadas desde Sanity
-const allReviews: Review[] = await sanityClient.fetch(`*[_type == "review" && approved == true] | order(date desc)`);
+// Obtenemos todos los ratings para calcular las estadísticas sin cargar textos inútiles
+const allRatings = await sanityClient.fetch(`*[_type == "review" && approved == true]{rating}`);
+
+// Obtenemos las 3 primeras reseñas completas para la carga inicial
+const initialReviews: Review[] = await sanityClient.fetch(`*[_type == "review" && approved == true] | order(date desc)[0...3]`);
 
 // Helper to render stars
 const renderStars = (rating: number) => {
@@ -24,12 +27,12 @@ const renderStars = (rating: number) => {
 };
 
 // Calculations for summary
-const totalReviews = allReviews.length;
-const averageRatingNum = totalReviews > 0 ? allReviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews : 0;
+const totalReviews = allRatings.length;
+const averageRatingNum = totalReviews > 0 ? allRatings.reduce((acc: number, review: { rating: number }) => acc + (review.rating || 0), 0) / totalReviews : 0;
 const averageRating = averageRatingNum.toFixed(1).replace(".", ",");
 
 const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-allReviews.forEach((r) => {
+allRatings.forEach((r: { rating: number }) => {
   const rating = r.rating || 0;
   if (rating >= 1 && rating <= 5) {
     ratingCounts[rating as keyof typeof ratingCounts]++;
@@ -89,10 +92,8 @@ const labels: Record<number, string> = {
 
     <div class="grid grid-cols-1 gap-6 mb-8" id="reviews-grid">
       {
-        allReviews.map((review, index) => (
-          <div
-            class={`bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 review-card ${index >= 3 ? "hidden" : ""}`}
-          >
+        initialReviews.map((review, index) => (
+          <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 review-card">
             <div class="flex items-center gap-3 mb-4">
               <div class="flex items-center" set:html={renderStars(review.rating)} />
               {review.date && (
@@ -110,7 +111,7 @@ const labels: Record<number, string> = {
     </div>
 
     {
-      allReviews.length > 3 && (
+      totalReviews > 3 && (
         <div class="text-center mb-12">
           <button
             id="load-more-reviews"
@@ -224,20 +225,65 @@ const labels: Record<number, string> = {
 
 <script>
   // Script para gestionar la carga de más reseñas
-  const loadMoreBtn = document.getElementById("load-more-reviews");
+  const loadMoreBtn = document.getElementById("load-more-reviews") as HTMLButtonElement | null;
   if (loadMoreBtn) {
-    let visibleCount = 3;
-    const reviewCards = document.querySelectorAll(".review-card");
+    let currentPage = 0;
+    const limit = 3;
+    const reviewsGrid = document.getElementById("reviews-grid");
 
-    loadMoreBtn.addEventListener("click", () => {
-      const nextCount = visibleCount + 3;
-      for (let i = visibleCount; i < nextCount && i < reviewCards.length; i++) {
-        reviewCards[i].classList.remove("hidden");
-      }
-      visibleCount = nextCount;
+    const renderStars = (rating: number) => {
+      // client-side renderStars logic
+      return Array.from({ length: 5 })
+        .map((_, i) =>
+          i < rating
+            ? '<svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>'
+            : '<svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>'
+        )
+        .join("");
+    };
 
-      if (visibleCount >= reviewCards.length) {
-        loadMoreBtn.style.display = "none";
+    loadMoreBtn.addEventListener("click", async () => {
+      const originalText = loadMoreBtn.innerText;
+      loadMoreBtn.innerText = "Cargando...";
+      loadMoreBtn.disabled = true;
+      loadMoreBtn.classList.add("opacity-75", "cursor-not-allowed");
+
+      try {
+        currentPage++;
+        const res = await fetch(`/api/get-reviews?page=${currentPage}`);
+        const newReviews = await res.json();
+
+        newReviews.forEach((review: any) => {
+          const card = document.createElement("div");
+          card.className = "bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 review-card";
+
+          const dateStr = review.date ? new Date(review.date).toLocaleDateString("es-ES") : "";
+          const dateHtml = review.date
+            ? `<span class="text-sm text-gray-500 dark:text-gray-400 font-medium border-l border-gray-300 dark:border-gray-600 pl-3">${dateStr}</span>`
+            : "";
+
+          card.innerHTML = `
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex items-center">${renderStars(review.rating)}</div>
+              ${dateHtml}
+            </div>
+            <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">${review.title || ""}</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 italic">${review.content || ""}</p>
+            <div class="text-sm text-gray-500 dark:text-gray-400 font-medium">- ${review.name || "Anónimo"}</div>
+          `;
+
+          reviewsGrid?.appendChild(card);
+        });
+
+        if (newReviews.length < limit) {
+          loadMoreBtn.style.display = "none";
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        loadMoreBtn.innerText = originalText;
+        loadMoreBtn.disabled = false;
+        loadMoreBtn.classList.remove("opacity-75", "cursor-not-allowed");
       }
     });
   }
