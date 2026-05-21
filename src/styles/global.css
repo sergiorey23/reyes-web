@@ -1,8 +1,13 @@
 @import "tailwindcss";
+@import "./fonts.css";
 @plugin "@tailwindcss/typography";
 
 /* Habilitar la variante dark manual para Tailwind v4 */
 @custom-variant dark (&:is(.dark *));
+
+html {
+  font-size: 18px;
+}
 
 @theme {
   --color-brand-blue: #4F8699;
