@@ -130,8 +130,11 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Metodología -->
-  <section class="py-16 bg-brand-green-dark dark:bg-gray-900 text-white">
-    <div class="max-w-4xl mx-auto px-4 text-center">
+  <section class="relative py-16 text-white bg-cover bg-center bg-no-repeat bg-[url('fondo-metodo.jpg')]">
+    <!-- Capa semitransparente para que destaque el texto -->
+    <div class="absolute inset-0 bg-gray-800/50 dark:bg-gray-900/50 mix-blend-multiply"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-serif mb-8 text-brand-accent text-shadow-lg">Mi método de trabajo</h2>
       <div class="space-y-6 text-lg">
         <p>
@@ -144,10 +147,7 @@ import Layout from "../layouts/Layout.astro";
         </p>
       </div>
       <div class="mt-10">
-        <a
-          href="/contacto"
-          class="inline-block text-white font-bold py-3 px-8 rounded-md bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 transition"
-        >
+        <a href="/contacto" class="inline-block text-white font-bold py-3 px-8 rounded-md bg-amber-600 hover:bg-amber-700 transition">
           Reserva tu primera sesión
         </a>
       </div>
