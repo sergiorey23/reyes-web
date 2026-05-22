@@ -2,9 +2,8 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import CookieBanner from "../components/CookieBanner.astro";
+// import CookieBanner from "../components/CookieBanner.astro"; // Comentado temporalmente: no se aplican analíticas
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
-import ScrollToTop from "../components/ScrollToTop.astro";
 
 interface Props {
   title: string;
@@ -68,13 +67,16 @@ const {
     </script>
   </head>
   <body class="bg-brand-light dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans flex flex-col min-h-screen transition-colors duration-300">
+    <!-- Patrón de fondo global -->
+    <div class="mt-20 fixed inset-0 bg-[url('/pattern.png')] bg-repeat grayscale opacity-20 pointer-events-none -z-10"></div>
+
     <Navbar />
     <main class="grow">
       <slot />
     </main>
     <Footer />
-    <CookieBanner />
+    <!-- <CookieBanner /> -->
     <WhatsAppFloat />
-    <ScrollToTop />
+    <!-- <ScrollToTop /> -->
   </body>
 </html>
