@@ -1,5 +1,8 @@
 import { sanityClient } from "sanity:client";
 
+// PARA VOLVER A SSR: Borra o comenta la siguiente línea
+export const prerender = false;
+
 export async function GET({ request }) {
   const url = new URL(request.url);
   const page = parseInt(url.searchParams.get('page') || '0', 10);

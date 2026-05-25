@@ -9,7 +9,8 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://reyesgarciamiro.es',
-  output: 'server',
+  // PARA VOLVER A SSR: Cambia 'static' por 'server'
+  output: 'static',
   image: {
     domains: ['cdn.sanity.io'],
   },

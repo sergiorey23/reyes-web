@@ -1,5 +1,8 @@
 import { escapeHtml, getEmailRecipients, sendEmail } from "../../utils/resend.js";
 
+// PARA VOLVER A SSR: Borra o comenta la siguiente línea
+export const prerender = false;
+
 export const POST = async ({ request }) => {
   const data = await request.formData();
   const email = data.get("email")?.toString().trim();
