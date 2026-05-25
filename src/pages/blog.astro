@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { sanityClient } from "sanity:client";
 import { urlFor } from "../utils/sanity.js";
+import { Image } from "astro:assets";
 
 // Obtenemos los posts ordenados por fecha de publicación (los más recientes primero)
 const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt desc)`);
@@ -34,14 +35,18 @@ const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt d
           </div>
         ) : (
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post: any) => (
+            {posts.map((post: any, index: number) => (
               <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md dark:hover:shadow-gray-700/50 transition-all duration-300 group flex flex-col h-full animate-fade-in-up">
                 {post.mainImage?.asset && (
                   <a href={`/blog/${post.slug.current}`} class="block overflow-hidden aspect-video bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-                    <img
+                    <Image
                       src={urlFor(post.mainImage).width(600).url()}
                       alt={post.title}
-                      class="w-full h-full  group-hover:scale-105 transition-transform duration-300"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      width={600}
+                      height={400}
+                      loading={index < 3 ? "eager" : "lazy"}
+                      decoding={index < 3 ? "sync" : "async"}
                     />
                   </a>
                 )}

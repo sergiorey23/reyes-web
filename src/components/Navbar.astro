@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import imgLogo from "../assets/logo.png";
+
 const links = [
   { href: "/", label: "Inicio" },
   { href: "/sobre-mi", label: "Sobre mí" },
@@ -14,11 +17,10 @@ const links = [
       <!-- Logo -->
       <div class="shrink-0 flex items-center">
         <a href="/">
-          <img
+          <Image
             class="h-18 w-auto transform scale-110 origin-left dark:brightness-0 dark:invert opacity-90 dark:opacity-100"
-            src="/logo.png"
-            loading="lazy"
-            decoding="async"
+            src={imgLogo}
+            loading="eager"
             alt="Reyes García Miró Logo"
           />
         </a>
