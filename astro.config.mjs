@@ -10,6 +10,9 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://reyesgarciamiro.es',
   output: 'server',
+  image: {
+    domains: ['cdn.sanity.io'],
+  },
   security: {
     checkOrigin: false,
   },
@@ -23,7 +26,9 @@ export default defineConfig({
       cors: true,
     },
   },
-  adapter: vercel(),
+  adapter: vercel({
+    imageService: true,
+  }),
   integrations: [
     sitemap(),
     sanity({

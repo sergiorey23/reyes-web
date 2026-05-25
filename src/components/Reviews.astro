@@ -131,8 +131,8 @@ const labels: Record<number, string> = {
       <h3 class="text-2xl font-serif mb-6 text-center">Deja tu reseña</h3>
       <form action="/api/reviews" method="POST" class="space-y-4" id="review-form">
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="rating-input">Puntuación</label>
-          <div class="flex space-x-1" id="star-rating">
+          <span class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" id="rating-label">Puntuación</span>
+          <div class="flex space-x-1" id="star-rating" aria-labelledby="rating-label" role="radiogroup">
             <svg
               class="w-8 h-8 text-gray-300 cursor-pointer star transition-colors hover:text-yellow-400"
               data-value="1"
@@ -211,6 +211,7 @@ const labels: Record<number, string> = {
             id="review-name"
             type="text"
             name="name"
+            autocomplete="name"
             class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-2 border focus:ring-brand-blue focus:border-brand-blue"
           />
         </div>
