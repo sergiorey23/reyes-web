@@ -1,0 +1,224 @@
+---
+import Turnstile from "./Turnstile.astro";
+import { sanityClient } from "sanity:client";
+
+interface Props {
+  postId: string;
+}
+
+const { postId } = Astro.props;
+
+// Fetch approved comments for this post
+const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == $postId && approved == true] | order(createdAt asc)`, { postId });
+---
+
+<div class="mt-16 pt-10 border-t border-gray-200 dark:border-gray-700">
+  <h2 class="text-2xl font-serif text-brand-blue dark:text-white uppercase tracking-wider mb-6">Comentarios ({comments.length})</h2>
+
+  {
+    comments.length > 0 ? (
+      <div class="space-y-6 mb-12">
+        {comments.map((comment: any) => (
+          <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+            <div class="flex items-center mb-2">
+              <div class="font-medium text-gray-900 dark:text-white">{comment.name}</div>
+              <span class="mx-2 text-gray-400">•</span>
+              <time class="text-sm text-gray-500 dark:text-gray-400">
+                {new Date(comment.createdAt).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric"
+                })}
+              </time>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{comment.content}</p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="text-gray-500 dark:text-gray-400 mb-12 italic">Aún no hay comentarios. ¡Sé el primero en comentar!</p>
+    )
+  }
+
+  <div class="bg-white dark:bg-gray-900">
+    <h3 class="text-xl font-serif text-brand-blue dark:text-white uppercase tracking-wider mb-2">Deja un comentario</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">
+      Tu dirección de correo electrónico no será publicada. Los campos obligatorios están marcados con *
+    </p>
+
+    <form id="comment-form" class="space-y-6">
+      <input type="hidden" name="postId" value={postId} />
+
+      <div>
+        <label for="content" class="sr-only">Comentario</label>
+        <textarea
+          id="content"
+          name="content"
+          rows="6"
+          placeholder="Escribe aquí..."
+          required
+          class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:outline-none transition-colors resize-y"
+        ></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="sr-only">Nombre*</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Nombre*"
+            required
+            class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:outline-none transition-colors"
+          />
+        </div>
+        <div>
+          <label for="email" class="sr-only">Correo electrónico*</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Correo electrónico*"
+            required
+            class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-md bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-green/50 focus:border-brand-green focus:outline-none transition-colors"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input
+            id="save-info"
+            name="save-info"
+            type="checkbox"
+            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-brand-green/50 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-brand-green/50 dark:ring-offset-gray-800"
+          />
+        </div>
+        <label for="save-info" class="ml-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+          Guarda mi nombre y correo electrónico en este navegador para la próxima vez que comente.
+        </label>
+      </div>
+
+      <Turnstile />
+
+      <div id="form-error" class="hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"></div>
+      <div id="form-success" class="hidden p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        ¡Comentario enviado! Está pendiente de moderación.
+      </div>
+
+      <button
+        type="submit"
+        id="submit-btn"
+        class="px-6 py-3 bg-brand-green/10 text-gray-800 dark:text-gray-200 dark:bg-gray-800 hover:bg-brand-green/20 dark:hover:bg-gray-700 font-medium rounded-md transition-colors flex items-center justify-center"
+      >
+        <span>Publicar comentario &raquo;</span>
+        <svg
+          id="submit-spinner"
+          class="hidden animate-spin ml-2 h-5 w-5 text-gray-600 dark:text-gray-300"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Script para manejar el guardado de datos y el envío del formulario
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("comment-form") as HTMLFormElement;
+    const nameInput = document.getElementById("name") as HTMLInputElement;
+    const emailInput = document.getElementById("email") as HTMLInputElement;
+    const saveInfoCheckbox = document.getElementById("save-info") as HTMLInputElement;
+    const errorDiv = document.getElementById("form-error");
+    const successDiv = document.getElementById("form-success");
+    const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+    const submitSpinner = document.getElementById("submit-spinner");
+
+    // Cargar datos guardados si existen
+    if (nameInput && emailInput) {
+      const savedName = localStorage.getItem("commentName");
+      const savedEmail = localStorage.getItem("commentEmail");
+
+      if (savedName) nameInput.value = savedName;
+      if (savedEmail) emailInput.value = savedEmail;
+      if (savedName || savedEmail) saveInfoCheckbox.checked = true;
+    }
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (errorDiv) errorDiv.classList.add("hidden");
+        if (successDiv) successDiv.classList.add("hidden");
+
+        // Guardar o borrar datos de localstorage según el checkbox
+        if (saveInfoCheckbox && saveInfoCheckbox.checked) {
+          localStorage.setItem("commentName", nameInput.value);
+          localStorage.setItem("commentEmail", emailInput.value);
+        } else {
+          localStorage.removeItem("commentName");
+          localStorage.removeItem("commentEmail");
+        }
+
+        const formData = new FormData(form);
+        const turnstileResponse = formData.get("cf-turnstile-response");
+
+        if (!turnstileResponse) {
+          if (errorDiv) {
+            errorDiv.textContent = "Por favor, completa el Captcha.";
+            errorDiv.classList.remove("hidden");
+          }
+          return;
+        }
+
+        // Estado de carga
+        if (submitBtn && submitSpinner) {
+          submitBtn.disabled = true;
+          submitSpinner.classList.remove("hidden");
+        }
+
+        try {
+          const response = await fetch("/api/comments", {
+            method: "POST",
+            body: formData
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            if (successDiv) successDiv.classList.remove("hidden");
+            form.reset();
+            // Resetear el captcha
+            if ("turnstile" in window) {
+              (window as any).turnstile.reset();
+            }
+          } else {
+            if (errorDiv) {
+              errorDiv.textContent = result.error || "Ocurrió un error al enviar el comentario.";
+              errorDiv.classList.remove("hidden");
+            }
+          }
+        } catch (error) {
+          if (errorDiv) {
+            errorDiv.textContent = "Ocurrió un error inesperado de conexión.";
+            errorDiv.classList.remove("hidden");
+          }
+        } finally {
+          if (submitBtn && submitSpinner) {
+            submitBtn.disabled = false;
+            submitSpinner.classList.add("hidden");
+          }
+        }
+      });
+    }
+  });
+</script>

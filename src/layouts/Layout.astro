@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-// import CookieBanner from "../components/CookieBanner.astro"; // Comentado temporalmente: no se aplican analíticas
+import CookieBanner from "../components/CookieBanner.astro";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 
 interface Props {
@@ -75,7 +75,7 @@ const {
       <slot />
     </main>
     <Footer />
-    <!-- <CookieBanner /> -->
+    <CookieBanner />
     <WhatsAppFloat />
     <!-- <ScrollToTop /> -->
   </body>

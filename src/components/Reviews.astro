@@ -1,5 +1,6 @@
 ---
 import { sanityClient } from "sanity:client";
+import Turnstile from "./Turnstile.astro";
 
 interface Review {
   rating: number;
@@ -216,6 +217,8 @@ const labels: Record<number, string> = {
           />
         </div>
 
+        <Turnstile />
+
         <button
           type="submit"
           class="w-full bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-md cursor-pointer transition"
@@ -343,6 +346,12 @@ const labels: Record<number, string> = {
     }
 
     const formData = new FormData(form);
+    const turnstileResponse = formData.get("cf-turnstile-response");
+
+    if (!turnstileResponse) {
+      alert("Por favor, completa el Captcha.");
+      return;
+    }
 
     try {
       const response = await fetch("/api/reviews", {
@@ -359,8 +368,12 @@ const labels: Record<number, string> = {
           s.classList.add("text-gray-300");
           s.classList.remove("text-yellow-400");
         });
+        if ("turnstile" in window) {
+          (window as any).turnstile.reset();
+        }
       } else {
-        alert("Hubo un error al enviar la reseña. Inténtalo de nuevo.");
+        const result = await response.json();
+        alert(result.error || "Hubo un error al enviar la reseña. Inténtalo de nuevo.");
       }
     } catch (error) {
       alert("Error de conexión.");

@@ -4,6 +4,7 @@ import { sanityClient } from "sanity:client";
 import { urlFor } from "../../utils/sanity.js";
 import { PortableText } from "astro-portabletext";
 import { Image } from "astro:assets";
+import CommentSection from "../../components/CommentSection.astro";
 
 // PARA VOLVER A SSR: Borra o comenta la siguiente función
 export async function getStaticPaths() {
@@ -61,6 +62,8 @@ const publishedDate = new Date(post.publishedAt).toLocaleDateString("es-ES", {
       <div class="prose prose-lg prose-blue dark:prose-invert max-w-none prose-img:rounded-xl prose-headings:font-serif">
         <PortableText value={post.body} />
       </div>
+
+      <CommentSection postId={post._id} />
     </div>
   </article>
 </Layout>
