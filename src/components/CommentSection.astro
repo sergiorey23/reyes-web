@@ -92,7 +92,7 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
             id="save-info"
             name="save-info"
             type="checkbox"
-            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-brand-green/50 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-brand-green/50 dark:ring-offset-gray-800"
+            class="w-4 h-4 border hover:cursor-pointer border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-brand-green/50 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-brand-green/50 dark:ring-offset-gray-800"
           />
         </div>
         <label for="save-info" class="ml-2 text-sm font-medium text-gray-600 dark:text-gray-300">
@@ -110,7 +110,7 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
       <button
         type="submit"
         id="submit-btn"
-        class="px-6 py-3 bg-brand-green/10 text-gray-800 dark:text-gray-200 dark:bg-gray-800 hover:bg-brand-green/20 dark:hover:bg-gray-700 font-medium rounded-md transition-colors flex items-center justify-center"
+        class="px-6 py-3 hover:cursor-pointer bg-brand-green/10 text-gray-800 dark:text-gray-200 dark:bg-gray-800 hover:bg-brand-green/20 dark:hover:bg-gray-700 font-medium rounded-md transition-colors flex items-center justify-center"
       >
         <span>Publicar comentario &raquo;</span>
         <svg
