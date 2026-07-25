@@ -1,5 +1,5 @@
 import { sanityClient } from "sanity:client";
-import { escapeHtml, getEmailRecipients, sendEmail } from "../../utils/resend.js";
+import { escapeHtml, getContactEmail, sendEmail } from "../../utils/email.js";
 
 // PARA VOLVER A SSR: Borra o comenta la siguiente línea
 export const prerender = false;
@@ -75,7 +75,7 @@ export const POST = async ({ request }) => {
 
     try {
       await sendEmail({
-        to: getEmailRecipients("RESEND_REVIEWS_TO_EMAIL", "RESEND_TO_EMAIL"),
+        to: getContactEmail(),
         subject: `Nueva reseña recibida (${rating}/5)`,
         html: `
           <h1>Nueva reseña recibida</h1>
@@ -86,7 +86,6 @@ export const POST = async ({ request }) => {
           <p><strong>Reseña:</strong></p>
           <p>${escapeHtml(content).replaceAll("\n", "<br>")}</p>
         `,
-        idempotencyKey: `review/${review._id}`
       });
     } catch (emailError) {
       console.error("La reseña se guardó, pero falló el aviso por email:", emailError);

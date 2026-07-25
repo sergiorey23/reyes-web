@@ -1,4 +1,6 @@
-import { escapeHtml, getEmailRecipients, sendEmail } from "../../utils/resend.js";
+import fs from "node:fs";
+import path from "node:path";
+import { escapeHtml, getContactEmail, sendEmail } from "../../utils/email.js";
 
 // PARA VOLVER A SSR: Borra o comenta la siguiente línea
 export const prerender = false;
@@ -9,13 +11,16 @@ export const POST = async ({ request }) => {
   const name = data.get("name")?.toString().trim();
   const pdfUrl = new URL("/Vence-la-ansiedad.pdf", request.url).toString();
 
+  const localPdfPath = path.join(process.cwd(), "public", "Vence-la-ansiedad.pdf");
+  const attachmentPath = fs.existsSync(localPdfPath) ? localPdfPath : pdfUrl;
+
   if (!email || !name) {
     return new Response(JSON.stringify({ error: "Faltan campos obligatorios" }), { status: 400 });
   }
 
   try {
     await sendEmail({
-      to: getEmailRecipients("RESEND_NEWSLETTER_TO_EMAIL", "RESEND_TO_EMAIL"),
+      to: getContactEmail(),
       subject: "Nueva suscripción a la newsletter",
       html: `
         <h1>Nueva suscripción a la newsletter</h1>
@@ -23,7 +28,6 @@ export const POST = async ({ request }) => {
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       `,
       replyTo: email,
-      idempotencyKey: `newsletter-admin/${email}`
     });
 
     await sendEmail({
@@ -38,10 +42,9 @@ export const POST = async ({ request }) => {
       attachments: [
         {
           filename: "Vence-la-ansiedad.pdf",
-          path: pdfUrl
+          path: attachmentPath
         }
       ],
-      idempotencyKey: `newsletter-pdf/${email}`
     });
 
     return new Response(JSON.stringify({ success: true, message: "Suscrito con éxito" }), { status: 200 });

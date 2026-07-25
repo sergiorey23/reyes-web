@@ -1,4 +1,4 @@
-import { escapeHtml, getEmailRecipients, sendEmail } from "../../utils/resend.js";
+import { escapeHtml, getContactEmail, sendEmail } from "../../utils/email.js";
 
 // PARA VOLVER A SSR: Borra o comenta la siguiente línea
 export const prerender = false;
@@ -42,7 +42,7 @@ export const POST = async ({ request }) => {
 
     // 2. Enviar el email
     await sendEmail({
-      to: getEmailRecipients("RESEND_CONTACT_TO_EMAIL", "RESEND_TO_EMAIL"),
+      to: getContactEmail(),
       subject: `Nuevo mensaje de contacto de ${name}`,
       html: `
         <h1>Nuevo mensaje de contacto</h1>
@@ -53,7 +53,6 @@ export const POST = async ({ request }) => {
         <p>${escapeHtml(message).replaceAll("\n", "<br>")}</p>
       `,
       replyTo: email,
-      idempotencyKey: `contact/${email}/${Date.now()}`
     });
 
     return new Response(JSON.stringify({ success: true, message: "Mensaje enviado con éxito" }), { status: 200 });
