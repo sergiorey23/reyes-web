@@ -103,16 +103,13 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
       <Turnstile />
 
       <div id="form-error" class="hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert"></div>
-      <div id="form-success" class="hidden p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-        ¡Comentario enviado! Está pendiente de moderación.
-      </div>
 
       <button
         type="submit"
         id="submit-btn"
-        class="px-6 py-3 hover:cursor-pointer bg-brand-green/10 text-gray-800 dark:text-gray-200 dark:bg-gray-800 hover:bg-brand-green/20 dark:hover:bg-gray-700 font-medium rounded-md transition-colors flex items-center justify-center"
+        class="px-6 py-3 hover:cursor-pointer bg-brand-green/10 text-gray-800 dark:text-gray-200 dark:bg-gray-800 hover:bg-brand-green/20 dark:hover:bg-gray-700 font-medium rounded-md transition-colors flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
       >
-        <span>Publicar comentario &raquo;</span>
+        <span id="submit-btn-text">Publicar comentario &raquo;</span>
         <svg
           id="submit-spinner"
           class="hidden animate-spin ml-2 h-5 w-5 text-gray-600 dark:text-gray-300"
@@ -128,6 +125,18 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
         </svg>
       </button>
     </form>
+
+    <div id="comment-success-card" class="hidden text-center py-8 px-6 bg-emerald-50/50 dark:bg-gray-800/80 rounded-xl border border-emerald-100 dark:border-gray-700 shadow-sm">
+      <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h4 class="text-xl font-serif text-brand-blue dark:text-white mb-2">¡Muchas gracias por comentar!</h4>
+      <p class="text-gray-600 dark:text-gray-300 text-sm max-w-md mx-auto">
+        Tu comentario ha sido enviado correctamente y se publicará tras ser revisado.
+      </p>
+    </div>
   </div>
 </div>
 
@@ -139,9 +148,10 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
     const emailInput = document.getElementById("email") as HTMLInputElement;
     const saveInfoCheckbox = document.getElementById("save-info") as HTMLInputElement;
     const errorDiv = document.getElementById("form-error");
-    const successDiv = document.getElementById("form-success");
+    const successCard = document.getElementById("comment-success-card");
     const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
     const submitSpinner = document.getElementById("submit-spinner");
+    const submitBtnText = document.getElementById("submit-btn-text");
 
     // Cargar datos guardados si existen
     if (nameInput && emailInput) {
@@ -158,7 +168,6 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
         e.preventDefault();
 
         if (errorDiv) errorDiv.classList.add("hidden");
-        if (successDiv) successDiv.classList.add("hidden");
 
         // Guardar o borrar datos de localstorage según el checkbox
         if (saveInfoCheckbox && saveInfoCheckbox.checked) {
@@ -174,7 +183,7 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
 
         if (!turnstileResponse) {
           if (errorDiv) {
-            errorDiv.textContent = "Por favor, completa el Captcha.";
+            errorDiv.textContent = "Por favor, completa el Captcha de seguridad.";
             errorDiv.classList.remove("hidden");
           }
           return;
@@ -184,6 +193,7 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
         if (submitBtn && submitSpinner) {
           submitBtn.disabled = true;
           submitSpinner.classList.remove("hidden");
+          if (submitBtnText) submitBtnText.textContent = "Enviando...";
         }
 
         try {
@@ -195,9 +205,9 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
           const result = await response.json();
 
           if (response.ok) {
-            if (successDiv) successDiv.classList.remove("hidden");
+            form.classList.add("hidden");
+            if (successCard) successCard.classList.remove("hidden");
             form.reset();
-            // Resetear el captcha
             if ("turnstile" in window) {
               (window as any).turnstile.reset();
             }
@@ -216,6 +226,7 @@ const comments = await sanityClient.fetch(`*[_type == "comment" && post._ref == 
           if (submitBtn && submitSpinner) {
             submitBtn.disabled = false;
             submitSpinner.classList.add("hidden");
+            if (submitBtnText) submitBtnText.textContent = "Publicar comentario »";
           }
         }
       });

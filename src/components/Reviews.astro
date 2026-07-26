@@ -219,13 +219,32 @@ const labels: Record<number, string> = {
 
         <Turnstile />
 
+        <div id="review-general-error" class="hidden p-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-300"></div>
+
         <button
           type="submit"
-          class="w-full bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-md cursor-pointer transition"
+          id="review-submit-btn"
+          class="w-full flex items-center justify-center bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-md cursor-pointer transition disabled:opacity-75 disabled:cursor-not-allowed"
         >
-          Enviar reseña
+          <svg id="review-spinner" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span id="review-btn-text">Enviar reseña</span>
         </button>
       </form>
+
+      <div id="review-success" class="hidden text-center py-8 px-4">
+        <div class="w-14 h-14 bg-amber-100 dark:bg-amber-900/30 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-serif text-gray-800 dark:text-gray-100 mb-2">¡Muchísimas gracias por tu opinión!</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-md mx-auto" id="review-success-msg">
+          Tu reseña ha sido enviada y registrada correctamente. Agradezco sinceramente tu tiempo y valoración.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -239,7 +258,6 @@ const labels: Record<number, string> = {
     const reviewsGrid = document.getElementById("reviews-grid");
 
     const renderStars = (rating: number) => {
-      // client-side renderStars logic
       return Array.from({ length: 5 })
         .map((_, i) =>
           i < rating
@@ -299,7 +317,13 @@ const labels: Record<number, string> = {
   const stars = document.querySelectorAll(".star");
   const ratingInput = document.getElementById("rating-input") as HTMLInputElement;
   const ratingError = document.getElementById("rating-error");
+  const reviewGeneralError = document.getElementById("review-general-error");
   const form = document.getElementById("review-form") as HTMLFormElement;
+  const reviewSuccess = document.getElementById("review-success");
+  const reviewSuccessMsg = document.getElementById("review-success-msg");
+  const reviewSubmitBtn = document.getElementById("review-submit-btn") as HTMLButtonElement;
+  const reviewSpinner = document.getElementById("review-spinner");
+  const reviewBtnText = document.getElementById("review-btn-text");
 
   stars.forEach((star) => {
     star.addEventListener("click", (e) => {
@@ -340,6 +364,11 @@ const labels: Record<number, string> = {
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (reviewGeneralError) {
+      reviewGeneralError.classList.add("hidden");
+      reviewGeneralError.textContent = "";
+    }
+
     if (ratingInput.value === "0") {
       ratingError?.classList.remove("hidden");
       return;
@@ -349,8 +378,17 @@ const labels: Record<number, string> = {
     const turnstileResponse = formData.get("cf-turnstile-response");
 
     if (!turnstileResponse) {
-      alert("Por favor, completa el Captcha.");
+      if (reviewGeneralError) {
+        reviewGeneralError.textContent = "Por favor, completa el Captcha de seguridad.";
+        reviewGeneralError.classList.remove("hidden");
+      }
       return;
+    }
+
+    if (reviewSubmitBtn && reviewSpinner && reviewBtnText) {
+      reviewSubmitBtn.disabled = true;
+      reviewSpinner.classList.remove("hidden");
+      reviewBtnText.textContent = "Enviando...";
     }
 
     try {
@@ -360,23 +398,34 @@ const labels: Record<number, string> = {
       });
 
       if (response.ok) {
-        alert("¡Gracias por tu reseña! " + (ratingInput.value === "5" ? "Se ha publicado correctamente." : "Ha sido enviada y está pendiente de moderación."));
-        form.reset();
-        // Reset stars
-        ratingInput.value = "0";
-        stars.forEach((s) => {
-          s.classList.add("text-gray-300");
-          s.classList.remove("text-yellow-400");
-        });
-        if ("turnstile" in window) {
-          (window as any).turnstile.reset();
+        const isFiveStars = ratingInput.value === "5";
+        if (reviewSuccessMsg) {
+          reviewSuccessMsg.textContent = isFiveStars
+            ? "¡Tu reseña se ha publicado automáticamente! Agradezco mucho tu valoración de 5 estrellas."
+            : "Tu reseña ha sido registrada y está pendiente de moderación. ¡Gracias por compartir tu experiencia!";
         }
+        form.classList.add("hidden");
+        reviewSuccess?.classList.remove("hidden");
+        form.reset();
+        ratingInput.value = "0";
       } else {
         const result = await response.json();
-        alert(result.error || "Hubo un error al enviar la reseña. Inténtalo de nuevo.");
+        if (reviewGeneralError) {
+          reviewGeneralError.textContent = result.error || "Hubo un error al enviar la reseña. Inténtalo de nuevo.";
+          reviewGeneralError.classList.remove("hidden");
+        }
       }
     } catch (error) {
-      alert("Error de conexión.");
+      if (reviewGeneralError) {
+        reviewGeneralError.textContent = "Error de conexión. Inténtalo de nuevo.";
+        reviewGeneralError.classList.remove("hidden");
+      }
+    } finally {
+      if (reviewSubmitBtn && reviewSpinner && reviewBtnText) {
+        reviewSubmitBtn.disabled = false;
+        reviewSpinner.classList.add("hidden");
+        reviewBtnText.textContent = "Enviar reseña";
+      }
     }
   });
 </script>

@@ -310,14 +310,33 @@ import imgFamily from "../assets/cerebros-divergentes-family.jpg";
             </label>
           </div>
 
+          <div id="news-error" class="hidden text-sm text-red-200 bg-red-900/60 p-3 rounded-md"></div>
+
           <button
             type="submit"
-            class="bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 hover:cursor-pointer"
+            id="news-submit-btn"
+            class="bg-amber-500 dark:bg-amber-600 hover:bg-amber-600 dark:hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 hover:cursor-pointer flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
           >
-            Suscribirme
+            <svg id="news-spinner" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span id="news-btn-text">Suscribirme</span>
           </button>
         </div>
       </form>
+
+      <div id="newsletter-success" class="hidden text-center py-8 px-6 bg-white/10 dark:bg-gray-800/80 rounded-2xl backdrop-blur-sm border border-white/20 max-w-md mx-auto shadow-lg">
+        <div class="w-14 h-14 bg-amber-500/20 text-amber-300 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-500/30">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-serif text-white mb-2">¡Suscripción realizada con éxito!</h3>
+        <p class="text-gray-100 text-sm leading-relaxed">
+          Te he enviado la guía <strong>«Vence la ansiedad»</strong> directamente a tu correo electrónico. Por favor, revisa tu bandeja de entrada.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -327,8 +346,25 @@ import imgFamily from "../assets/cerebros-divergentes-family.jpg";
 
 <script>
   const newsForm = document.getElementById("newsletter-form") as HTMLFormElement;
+  const newsSuccess = document.getElementById("newsletter-success");
+  const newsError = document.getElementById("news-error");
+  const newsSubmitBtn = document.getElementById("news-submit-btn") as HTMLButtonElement;
+  const newsSpinner = document.getElementById("news-spinner");
+  const newsBtnText = document.getElementById("news-btn-text");
+
   newsForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    if (newsError) {
+      newsError.classList.add("hidden");
+      newsError.textContent = "";
+    }
+
+    if (newsSubmitBtn && newsSpinner && newsBtnText) {
+      newsSubmitBtn.disabled = true;
+      newsSpinner.classList.remove("hidden");
+      newsBtnText.textContent = "Suscribiendo...";
+    }
 
     try {
       const response = await fetch(newsForm.action, {
@@ -337,13 +373,27 @@ import imgFamily from "../assets/cerebros-divergentes-family.jpg";
       });
 
       if (response.ok) {
-        alert("Suscripción realizada con éxito. Revisa tu bandeja de entrada para descargar la guía gratuita.");
+        newsForm.classList.add("hidden");
+        newsSuccess?.classList.remove("hidden");
         newsForm.reset();
       } else {
-        alert("Hubo un error al realizar la suscripción. Inténtalo de nuevo.");
+        const result = await response.json().catch(() => ({}));
+        if (newsError) {
+          newsError.textContent = result.error || "Hubo un error al realizar la suscripción. Inténtalo de nuevo.";
+          newsError.classList.remove("hidden");
+        }
       }
     } catch (error) {
-      alert("Error de conexión.");
+      if (newsError) {
+        newsError.textContent = "Error de conexión. Inténtalo de nuevo.";
+        newsError.classList.remove("hidden");
+      }
+    } finally {
+      if (newsSubmitBtn && newsSpinner && newsBtnText) {
+        newsSubmitBtn.disabled = false;
+        newsSpinner.classList.add("hidden");
+        newsBtnText.textContent = "Suscribirme";
+      }
     }
   });
 </script>
