@@ -1,0 +1,18 @@
+{
+  "redirects": [
+    { "source": "/contacto-reyes-garcia-miro/", "destination": "/contacto", "permanent": true },
+    { "source": "/servicios_psicoterapia-on-line/", "destination": "/servicios", "permanent": true },
+    { "source": "/nuevos-cerebros/", "destination": "/blog", "permanent": true },
+    { "source": "/mindfulness-como-la-atencion-plena-transforma-tu-bienestar/", "destination": "/blog/mindfulness-como-la-atencion-plena-transforma-tu-bienestar", "permanent": true },
+    { "source": "/la-ansiedad-entenderla-para-superarla/", "destination": "/blog/la-ansiedad-entenderla-para-superarla", "permanent": true },
+    { "source": "/enfoques-terapeuticos-en-psicologia-como-elegir-el-tratamiento-que-mejor-se-adapta-a-ti/", "destination": "/blog/enfoques-terapeuticos-en-psicologia-como-elegir-el-tratamiento-que-mejor-se-adapta-a-ti", "permanent": true },
+    { "source": "/el-adulto-con-tdah-desafios-y-oportunidades/", "destination": "/blog/el-adulto-con-tdah-desafios-y-oportunidades", "permanent": true },
+    { "source": "/depresion-entendiendo-el-dolor-invisible-y-como-encontrar-el-camino-hacia-la-recuperacion/", "destination": "/blog/depresion-entendiendo-el-dolor-invisible-y-como-encontrar-el-camino-hacia-la-recuperacion", "permanent": true },
+    { "source": "/mi-relacion-de-pareja-es-toxica/", "destination": "/blog/mi-relacion-de-pareja-es-toxica", "permanent": true },
+    { "source": "/la-salud-mental-como-problema-de-salud-publica/", "destination": "/blog/la-salud-mental-como-problema-de-salud-publica", "permanent": true },
+    { "source": "/cuidar-la-mente-de-tu-hijo-guia-practica-de-psicologia-infantil-para-padres/", "destination": "/blog/cuidar-la-mente-de-tu-hijo-guia-practica-de-psicologia-infantil-para-padres", "permanent": true },
+    { "source": "/tdah-trastorno-o-altas-capacidades/", "destination": "/blog/tdah-trastorno-o-altas-capacidades", "permanent": true },
+    { "source": "/pensamientos-obsesivos-pensamientos-obsesivos-por-que-ocurren-y-como-gestionarlos/", "destination": "/blog/pensamientos-obsesivos-pensamientos-obsesivos-por-que-ocurren-y-como-gestionarlos", "permanent": true },
+    { "source": "/pornografia-y-prostitucion-dos-caras-de-una-misma-moneda/", "destination": "/blog/pornografia-y-prostitucion-dos-caras-de-una-misma-moneda", "permanent": true }
+  ]
+}
