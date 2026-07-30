@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 const getEnv = (key) => import.meta.env[key] || process.env[key];
 
-export const getContactEmail = () => getEnv("CONTACT_EMAIL") || "reyes@reyesgarciamiro.com";
+export const getContactEmail = () => getEnv("CONTACT_EMAIL") || "reyes_garcia_miro@hotmail.com";
 
 export const escapeHtml = (value) =>
   String(value ?? "")
