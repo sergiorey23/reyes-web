@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 const getEnv = (key) => import.meta.env[key] || process.env[key];
 
-export const getContactEmail = () => getEnv("CONTACT_EMAIL") || "reyes@reyesgarciamiro.es";
+export const getContactEmail = () => getEnv("CONTACT_EMAIL") || "reyes@reyesgarciamiro.com";
 
 export const escapeHtml = (value) =>
   String(value ?? "")
@@ -15,7 +15,7 @@ export const escapeHtml = (value) =>
 export const sendEmail = async ({ to, subject, html, replyTo, attachments }) => {
   const host = getEnv("SMTP_HOST") || "smtp.mail.ovh.net";
   const port = Number(getEnv("SMTP_PORT")) || 465;
-  const user = getEnv("SMTP_USER") || "info@reyesgarciamiro.es";
+  const user = getEnv("SMTP_USER") || "info@reyesgarciamiro.com";
   const pass = getEnv("SMTP_PASSWORD");
 
   if (!pass) {
