@@ -112,29 +112,29 @@ const testimonials = [
     const nextSlide = () => goToSlide(currentSlide + 1);
     const prevSlide = () => goToSlide(currentSlide - 1);
 
+    // Detiene definitivamente el autoplay tras la primera interacción del usuario
+    const stopAutoPlay = () => {
+      clearInterval(autoPlayInterval);
+    };
+
     nextBtn?.addEventListener("click", () => {
+      stopAutoPlay();
       nextSlide();
-      resetInterval();
     });
 
     prevBtn?.addEventListener("click", () => {
+      stopAutoPlay();
       prevSlide();
-      resetInterval();
     });
 
     dots.forEach((dot, index) => {
       dot.addEventListener("click", () => {
+        stopAutoPlay();
         goToSlide(index);
-        resetInterval();
       });
     });
 
-    const resetInterval = () => {
-      clearInterval(autoPlayInterval);
-      autoPlayInterval = window.setInterval(nextSlide, 6000);
-    };
-
     // Iniciar autoplay
-    resetInterval();
+    autoPlayInterval = window.setInterval(nextSlide, 6000);
   });
 </script>
