@@ -114,7 +114,7 @@ import Layout from "../layouts/Layout.astro";
         <address class="not-italic pl-4 border-l-4 border-brand-green">
           Reyes García Miró<br />
           Calle Mauricio Legendre, 4 – 28045 Madrid<br />
-          Email: <a href="mailto:reyes@reyesgarciamiro.es" class="text-brand-green hover:underline">reyes@reyesgarciamiro.es</a>
+          Email: <a href={`mailto:${import.meta.env.CONTACT_EMAIL}`} class="text-brand-green hover:underline">{import.meta.env.CONTACT_EMAIL}</a>
         </address>
       </div>
     </div>

@@ -58,7 +58,9 @@
       <div>
         <h3 class="text-xl font-serif mb-4 text-brand-accent">Contacto</h3>
         <p class="text-gray-300">Teléfono: <a href="tel:+34630893355" class="hover:text-white transition">+34 630 893 355</a></p>
-        <p class="text-gray-300">Email: <a href="mailto:reyes@reyesgarciamiro.es" class="hover:text-white transition">reyes@reyesgarciamiro.es</a></p>
+        <p class="text-gray-300">
+          Email: <a href={`mailto:${import.meta.env.CONTACT_EMAIL}`} class="hover:text-white transition">{import.meta.env.CONTACT_EMAIL}</a>
+        </p>
       </div>
       <div>
         <h3 class="text-xl font-serif mb-4 text-brand-accent">Legal</h3>
