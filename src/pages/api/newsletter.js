@@ -1,3 +1,10 @@
+// ============================================================
+// NEWSLETTER API - DESACTIVADA
+// Esta sección fue comentada para evitar spam.
+// El formulario de suscripción también está comentado en index.astro.
+// ============================================================
+
+/*
 import fs from "node:fs";
 import path from "node:path";
 import { escapeHtml, getContactEmail, sendEmail } from "../../utils/email.js";
@@ -53,3 +60,4 @@ export const POST = async ({ request }) => {
     return new Response(JSON.stringify({ error: "Error interno del servidor al enviar la suscripción" }), { status: 500 });
   }
 };
+*/
