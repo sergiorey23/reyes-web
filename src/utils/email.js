@@ -30,7 +30,7 @@ export const sendEmail = async ({ to, subject, html, replyTo, attachments }) => 
   const resend = new Resend(apiKey);
 
   const mailOptions = {
-    from: "Reyes García Miró <info@reyesgarciamiro.es>",
+    from: "Reyes García Miró <info@reyesgarciamiro.com>",
     to: recipients,
     subject,
     html,
